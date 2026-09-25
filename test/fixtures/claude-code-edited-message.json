@@ -1,0 +1,153 @@
+{
+ "providerId": "claude-code",
+ "threadId": "thr_f2kyvh77uu",
+ "originKind": null,
+ "note": "claude-code edited message",
+ "events": [
+  {
+   "seq": 115,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790344215896,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "itemId": "daae2d6b1d-i12",
+    "delta": "lib/format.js`** — exports `"
+   }
+  },
+  {
+   "seq": 116,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790344215902,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "itemId": "daae2d6b1d-i12",
+    "delta": "formatTask(task)` that formats a task as"
+   }
+  },
+  {
+   "seq": 117,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790344216045,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "itemId": "daae2d6b1d-i12",
+    "delta": " `id [status] (priority)"
+   }
+  },
+  {
+   "seq": 118,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790344216169,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "itemId": "daae2d6b1d-i12",
+    "delta": " text` on a single line\n\nBoth files are un"
+   }
+  },
+  {
+   "seq": 119,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790344216295,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "itemId": "daae2d6b1d-i12",
+    "delta": "tracked. Verify with"
+   }
+  },
+  {
+   "seq": 120,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790344216341,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "itemId": "daae2d6b1d-i12",
+    "delta": ":\n```bash\ngit status\n```"
+   }
+  },
+  {
+   "seq": 122,
+   "type": "item/completed",
+   "createdAt": 1790344216341,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "item": {
+     "type": "agentMessage",
+     "id": "daae2d6b1d-i12",
+     "text": "Done! I've created:\n\n1. **`notes/ideas.md`** — three improvement ideas for the to-do app:\n   - Due dates with overdue warnings\n   - Categories/tags for filtering\n   - Recurring tasks\n\n2. **`lib/format.js`** — exports `formatTask(task)` that formats a task as `id [status] (priority) text` on a single line\n\nBoth files are untracked. Verify with:\n```bash\ngit status\n```"
+    }
+   }
+  },
+  {
+   "seq": 125,
+   "type": "turn/completed",
+   "createdAt": 1790344216346,
+   "data": {
+    "providerThreadId": "f6738116-e26b-4f28-a6cc-27367fcc58b6",
+    "status": "completed",
+    "providerCheckpointId": "3f270cdd-6e89-44b5-84bd-b422192a3aca"
+   }
+  },
+  {
+   "seq": 619,
+   "type": "system/operation",
+   "createdAt": 1790344331522,
+   "data": {
+    "operation": "edit_message",
+    "status": "completed",
+    "message": "Message edited",
+    "operationId": "op_0muh0sfb9s0lethl",
+    "metadata": {
+     "cutoffSequence": 127,
+     "oldMaxSequence": 618,
+     "removedTurnId": "daae2d6b1d-t2",
+     "replacementProviderThreadId": "09208a01-7c3e-4267-b697-caf8a81caeca",
+     "fingerprint": "8340bbcb328fe59d9c5496bbf53a3b7c9cf199a37fa90072974fbf2fb674e57c",
+     "requestSequence": 620
+    }
+   }
+  },
+  {
+   "seq": 620,
+   "type": "client/turn/requested",
+   "createdAt": 1790344331525,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_mpvt3bpyb9",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Use `formatTask` from `lib/format.js` in `todo.js`, and delete `notes/ideas.md` instead of renaming it. Keep `scripts/run.sh`. Don't commit.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "claude-haiku-4-5-20251001",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "accept-edits",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 624,
+   "type": "turn/started",
+   "createdAt": 1790344334328,
+   "data": {
+    "providerThreadId": "3d42cc97-ecdf-49f0-9bba-45c70560f58b"
+   }
+  }
+ ]
+}

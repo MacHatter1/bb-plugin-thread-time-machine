@@ -1,0 +1,80 @@
+{
+ "providerId": "acp-opencode",
+ "threadId": "thr_tjgry7qfek",
+ "originKind": null,
+ "note": "opencode probe with an explicit model: provider error",
+ "events": [
+  {
+   "seq": 1,
+   "type": "client/turn/requested",
+   "createdAt": 1790360448899,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_zdyue7wemz",
+    "source": "spawn",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "This is a short probe task for testing an event viewer. Keep it small and do not touch any other files.\n\n1. Create `probe/notes.md` containing exactly two lines: `alpha` and `beta`.\n2. Edit `probe/notes.md` so the second line reads `gamma` instead of `beta`.\n3. Run the shell command `cat probe/notes.md && ls probe`.\n4. Run the shell command `ls probe/does-not-exist` (it is expected to fail).\n5. Reply with one sentence saying what you did.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "thread-start"
+    },
+    "request": {
+     "method": "thread/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "openai/gpt-4.1-mini",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 16,
+   "type": "turn/started",
+   "createdAt": 1790360450774,
+   "data": {
+    "providerThreadId": "ses_f26338a15ffePCvyzqDw7obxmb"
+   }
+  },
+  {
+   "seq": 18,
+   "type": "provider/error",
+   "createdAt": 1790360450807,
+   "data": {
+    "providerThreadId": "ses_f26338a15ffePCvyzqDw7obxmb",
+    "message": "Provider error",
+    "detail": "Internal error: Model unavailable: openai/gpt-4.1-mini: {\"service\":\"session\",\"errorName\":\"provider.no-route\"}"
+   }
+  },
+  {
+   "seq": 19,
+   "type": "turn/completed",
+   "createdAt": 1790360450807,
+   "data": {
+    "providerThreadId": "ses_f26338a15ffePCvyzqDw7obxmb",
+    "status": "failed"
+   }
+  },
+  {
+   "seq": 20,
+   "type": "provider/warning",
+   "createdAt": 1790360450807,
+   "data": {
+    "providerThreadId": "ses_f26338a15ffePCvyzqDw7obxmb",
+    "category": "general",
+    "summary": "Internal error: Model unavailable: openai/gpt-4.1-mini: {\"service\":\"session\",\"errorName\":\"provider.no-route\"}"
+   }
+  }
+ ]
+}

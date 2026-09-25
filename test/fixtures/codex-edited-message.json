@@ -1,0 +1,1237 @@
+{
+ "providerId": "codex",
+ "threadId": "thr_vd8c3bib4f",
+ "originKind": null,
+ "note": "codex thread whose first message was edited",
+ "events": [
+  {
+   "seq": 1,
+   "type": "client/turn/requested",
+   "createdAt": 1790332155021,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_742yqndeg7",
+    "source": "spawn",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Create the file e2e/scratch.txt containing exactly one line: one. Do nothing else: no other files, no commits.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "thread-start"
+    },
+    "request": {
+     "method": "thread/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 19,
+   "type": "turn/started",
+   "createdAt": 1790332156939,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b"
+   }
+  },
+  {
+   "seq": 21,
+   "type": "item/started",
+   "createdAt": 1790332160639,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i1",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 22,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332160639,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "itemId": "da7b3b72a7-i1",
+    "delta": "I"
+   }
+  },
+  {
+   "seq": 28,
+   "type": "item/completed",
+   "createdAt": 1790332161429,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i1",
+     "text": "I’ll create `e2e/scratch.txt` with the single line `one`.\n",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 29,
+   "type": "item/started",
+   "createdAt": 1790332162705,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "item": {
+     "type": "commandExecution",
+     "id": "da7b3b72a7-i2",
+     "command": "/bin/zsh -lc \"mkdir -p e2e && printf 'one\\\\n' > e2e/scratch.txt\"",
+     "cwd": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_vd8c3bib4f-1/bb-plugin-rewind",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "mkdir -p e2e && printf 'one\\\\n' > e2e/scratch.txt"
+     }
+    }
+   }
+  },
+  {
+   "seq": 30,
+   "type": "item/completed",
+   "createdAt": 1790332162705,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "item": {
+     "type": "commandExecution",
+     "id": "da7b3b72a7-i2",
+     "command": "/bin/zsh -lc \"mkdir -p e2e && printf 'one\\\\n' > e2e/scratch.txt\"",
+     "cwd": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_vd8c3bib4f-1/bb-plugin-rewind",
+     "status": "completed",
+     "approvalStatus": null,
+     "exitCode": 0,
+     "durationMs": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "mkdir -p e2e && printf 'one\\\\n' > e2e/scratch.txt"
+     }
+    }
+   }
+  },
+  {
+   "seq": 34,
+   "type": "item/started",
+   "createdAt": 1790332168386,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i3",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 35,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332168386,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "itemId": "da7b3b72a7-i3",
+    "delta": "Created"
+   }
+  },
+  {
+   "seq": 43,
+   "type": "item/completed",
+   "createdAt": 1790332169287,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i3",
+     "text": "Created `e2e/scratch.txt` containing exactly `one` on one line. No other files changed; no commits.",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 47,
+   "type": "turn/completed",
+   "createdAt": 1790332169317,
+   "data": {
+    "providerThreadId": "01a0d81c-bb85-7711-9ac6-f4ba02143b6b",
+    "status": "completed",
+    "providerCheckpointId": "01a0d81c-bbff-7c52-ac68-24abe222b3fc"
+   }
+  },
+  {
+   "seq": 83,
+   "type": "system/operation",
+   "createdAt": 1790332202574,
+   "data": {
+    "operation": "edit_message",
+    "status": "completed",
+    "message": "Message edited",
+    "operationId": "op_0mugtkfg33flkk51",
+    "metadata": {
+     "cutoffSequence": 48,
+     "oldMaxSequence": 82,
+     "removedTurnId": "da7b3b72a7-t2",
+     "replacementProviderThreadId": "01a0d81d-6d29-7ae0-96d4-70d8ef1a51a3",
+     "fingerprint": "d088dd257f1506b2c5a9e65cdc2c6f8805f4cc98c81616996d3a90fc3a1ef8f9",
+     "requestSequence": 84
+    }
+   }
+  },
+  {
+   "seq": 84,
+   "type": "client/turn/requested",
+   "createdAt": 1790332202576,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_g8pwj8sykh",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Change e2e/scratch.txt so it contains exactly one line: three. Do nothing else: no other files, no commits.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 87,
+   "type": "provider/warning",
+   "createdAt": 1790332205752,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "category": "deprecation",
+    "summary": "Full-history hydration is deprecated for paginated threads; use `excludeTurns: true`, then page with `thread/turns/list` and `thread/items/list`."
+   }
+  },
+  {
+   "seq": 92,
+   "type": "turn/started",
+   "createdAt": 1790332205759,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206"
+   }
+  },
+  {
+   "seq": 94,
+   "type": "item/started",
+   "createdAt": 1790332210314,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i7",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 95,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332210314,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i7",
+    "delta": "I"
+   }
+  },
+  {
+   "seq": 101,
+   "type": "item/completed",
+   "createdAt": 1790332211107,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i7",
+     "text": "I’ll update `e2e/scratch.txt` to the single line `three`.\n",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 102,
+   "type": "item/started",
+   "createdAt": 1790332212162,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "commandExecution",
+     "id": "da7b3b72a7-i8",
+     "command": "/bin/zsh -lc \"printf 'three\\\\n' > e2e/scratch.txt\"",
+     "cwd": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_vd8c3bib4f-1/bb-plugin-rewind",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "printf 'three\\\\n' > e2e/scratch.txt"
+     }
+    }
+   }
+  },
+  {
+   "seq": 103,
+   "type": "item/completed",
+   "createdAt": 1790332212162,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "commandExecution",
+     "id": "da7b3b72a7-i8",
+     "command": "/bin/zsh -lc \"printf 'three\\\\n' > e2e/scratch.txt\"",
+     "cwd": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_vd8c3bib4f-1/bb-plugin-rewind",
+     "status": "completed",
+     "approvalStatus": null,
+     "exitCode": 0,
+     "durationMs": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "printf 'three\\\\n' > e2e/scratch.txt"
+     }
+    }
+   }
+  },
+  {
+   "seq": 107,
+   "type": "item/started",
+   "createdAt": 1790332216796,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i9",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 108,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332216796,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i9",
+    "delta": "Updated"
+   }
+  },
+  {
+   "seq": 109,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332217019,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i9",
+    "delta": " `e2e/scratch.txt` to"
+   }
+  },
+  {
+   "seq": 110,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332217021,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i9",
+    "delta": " exactly one line: `three`."
+   }
+  },
+  {
+   "seq": 111,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332217236,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i9",
+    "delta": " No other files"
+   }
+  },
+  {
+   "seq": 112,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332217341,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i9",
+    "delta": " changed; no commits"
+   }
+  },
+  {
+   "seq": 113,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332217381,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i9",
+    "delta": "."
+   }
+  },
+  {
+   "seq": 114,
+   "type": "item/completed",
+   "createdAt": 1790332217381,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i9",
+     "text": "Updated `e2e/scratch.txt` to exactly one line: `three`. No other files changed; no commits.",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 118,
+   "type": "turn/completed",
+   "createdAt": 1790332217410,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "status": "completed",
+    "providerCheckpointId": "01a0d81d-7a89-7873-bcec-6c23f9e1324b"
+   }
+  },
+  {
+   "seq": 119,
+   "type": "client/turn/requested",
+   "createdAt": 1790332391085,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_ix2da7n7uy",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Reply with the single word ok. Do not run any commands or change any files.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 120,
+   "type": "turn/started",
+   "createdAt": 1790332391281,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206"
+   }
+  },
+  {
+   "seq": 122,
+   "type": "item/started",
+   "createdAt": 1790332394149,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i10",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 123,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332394149,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i10",
+    "delta": "ok"
+   }
+  },
+  {
+   "seq": 124,
+   "type": "item/completed",
+   "createdAt": 1790332394225,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i10",
+     "text": "ok",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 128,
+   "type": "turn/completed",
+   "createdAt": 1790332394263,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "status": "completed",
+    "providerCheckpointId": "01a0d820-4f5a-7572-8145-a7e8d833f7cb"
+   }
+  },
+  {
+   "seq": 129,
+   "type": "client/turn/requested",
+   "createdAt": 1790332600624,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_jjwzek788b",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Reply with the single word ok. Do not run any commands or change any files.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 130,
+   "type": "turn/started",
+   "createdAt": 1790332600862,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206"
+   }
+  },
+  {
+   "seq": 132,
+   "type": "item/started",
+   "createdAt": 1790332603217,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i11",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 133,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332603217,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i11",
+    "delta": "ok"
+   }
+  },
+  {
+   "seq": 134,
+   "type": "item/completed",
+   "createdAt": 1790332603296,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i11",
+     "text": "ok",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 138,
+   "type": "turn/completed",
+   "createdAt": 1790332603325,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "status": "completed",
+    "providerCheckpointId": "01a0d823-81fa-76f3-b4d1-c58d94e92abb"
+   }
+  },
+  {
+   "seq": 139,
+   "type": "client/turn/requested",
+   "createdAt": 1790332800826,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_cp2xj457pz",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Reply with the single word ok. Do not run any commands or change any files.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 140,
+   "type": "turn/started",
+   "createdAt": 1790332800919,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206"
+   }
+  },
+  {
+   "seq": 142,
+   "type": "item/started",
+   "createdAt": 1790332806231,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i12",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 143,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332806231,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i12",
+    "delta": "ok"
+   }
+  },
+  {
+   "seq": 144,
+   "type": "item/completed",
+   "createdAt": 1790332806355,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i12",
+     "text": "ok",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 148,
+   "type": "turn/completed",
+   "createdAt": 1790332806409,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "status": "completed",
+    "providerCheckpointId": "01a0d826-8f82-7e92-b2d7-7550fda09ab2"
+   }
+  },
+  {
+   "seq": 149,
+   "type": "client/turn/requested",
+   "createdAt": 1790332858463,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_wthum4v7q3",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Reply with the single word ok. Do not run any commands or change any files.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 150,
+   "type": "turn/started",
+   "createdAt": 1790332858966,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206"
+   }
+  },
+  {
+   "seq": 152,
+   "type": "item/started",
+   "createdAt": 1790332861962,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i13",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 153,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790332861962,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i13",
+    "delta": "ok"
+   }
+  },
+  {
+   "seq": 154,
+   "type": "item/completed",
+   "createdAt": 1790332862034,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i13",
+     "text": "ok",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 158,
+   "type": "turn/completed",
+   "createdAt": 1790332862081,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "status": "completed",
+    "providerCheckpointId": "01a0d827-7211-7e23-b030-175bd4f6e056"
+   }
+  },
+  {
+   "seq": 159,
+   "type": "client/turn/requested",
+   "createdAt": 1790333181255,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_kntua5m8ik",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Run exactly this shell command from the workspace root and nothing else: git init -q --bare e2e/remote.git && git push --dry-run e2e/remote.git HEAD:refs/heads/probe . Then reply with the word done.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gpt-6-astra",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "auto",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 160,
+   "type": "turn/started",
+   "createdAt": 1790333181365,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206"
+   }
+  },
+  {
+   "seq": 162,
+   "type": "item/started",
+   "createdAt": 1790333186755,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "reasoning",
+     "id": "da7b3b72a7-i14",
+     "summary": [],
+     "content": [],
+     "presentation": {
+      "label": {
+       "pending": "Thinking",
+       "completed": "Thought"
+      },
+      "icon": {
+       "glyph": "Brain"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 163,
+   "type": "item/completed",
+   "createdAt": 1790333191825,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "reasoning",
+     "id": "da7b3b72a7-i14",
+     "summary": [],
+     "content": [],
+     "presentation": {
+      "label": {
+       "pending": "Thinking",
+       "completed": "Thought"
+      },
+      "icon": {
+       "glyph": "Brain"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 164,
+   "type": "item/started",
+   "createdAt": 1790333191825,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i15",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 165,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790333191825,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i15",
+    "delta": "I"
+   }
+  },
+  {
+   "seq": 166,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790333192040,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i15",
+    "delta": "’ll run the"
+   }
+  },
+  {
+   "seq": 167,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790333192162,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i15",
+    "delta": " command from the workspace"
+   }
+  },
+  {
+   "seq": 168,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790333192472,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i15",
+    "delta": " root.\n"
+   }
+  },
+  {
+   "seq": 169,
+   "type": "item/completed",
+   "createdAt": 1790333192472,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i15",
+     "text": "I’ll run the command from the workspace root.\n",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 170,
+   "type": "item/started",
+   "createdAt": 1790333195335,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "commandExecution",
+     "id": "da7b3b72a7-i16",
+     "command": "/bin/zsh -lc 'git init -q --bare e2e/remote.git && git push --dry-run e2e/remote.git HEAD:refs/heads/probe .'",
+     "cwd": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_vd8c3bib4f-1/bb-plugin-rewind",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "git init -q --bare e2e/remote.git && git push --dry-run e2e/remote.git HEAD:refs/heads/probe ."
+     }
+    }
+   }
+  },
+  {
+   "seq": 171,
+   "type": "item/completed",
+   "createdAt": 1790333195335,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "commandExecution",
+     "id": "da7b3b72a7-i16",
+     "command": "/bin/zsh -lc 'git init -q --bare e2e/remote.git && git push --dry-run e2e/remote.git HEAD:refs/heads/probe .'",
+     "cwd": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_vd8c3bib4f-1/bb-plugin-rewind",
+     "status": "failed",
+     "approvalStatus": null,
+     "aggregatedOutput": "fatal: invalid refspec '.'\n",
+     "exitCode": 128,
+     "durationMs": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "git init -q --bare e2e/remote.git && git push --dry-run e2e/remote.git HEAD:refs/heads/probe ."
+     }
+    }
+   }
+  },
+  {
+   "seq": 175,
+   "type": "item/started",
+   "createdAt": 1790333203959,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i17",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 176,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790333203959,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "itemId": "da7b3b72a7-i17",
+    "delta": "done"
+   }
+  },
+  {
+   "seq": 177,
+   "type": "item/completed",
+   "createdAt": 1790333204026,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "item": {
+     "type": "agentMessage",
+     "id": "da7b3b72a7-i17",
+     "text": "done",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 181,
+   "type": "turn/completed",
+   "createdAt": 1790333204057,
+   "data": {
+    "providerThreadId": "01a0d81d-79a7-7ce2-92ec-3d10acffc206",
+    "status": "completed",
+    "providerCheckpointId": "01a0d82c-5da2-7f01-a034-c492058ffec2"
+   }
+  }
+ ]
+}

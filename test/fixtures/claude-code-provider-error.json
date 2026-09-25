@@ -1,0 +1,172 @@
+{
+ "providerId": "claude-code",
+ "threadId": "thr_4hbrvzczie",
+ "originKind": null,
+ "note": "claude-code provider/error with willRetry",
+ "events": [
+  {
+   "seq": 9761,
+   "type": "item/completed",
+   "createdAt": 1790166768228,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "item": {
+     "type": "reasoning",
+     "id": "da3726555a-i706",
+     "summary": [],
+     "content": [
+      "Pi passed all 34 event-bus tests, and strong agent performance on medium tasks is informing calibration of the remaining eight. While the rest finishes, I'll visually inspect the new UI pages in a headless browser.\n\n"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 9763,
+   "type": "item/started",
+   "createdAt": 1790166768233,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "item": {
+     "type": "commandExecution",
+     "id": "da3726555a-i707",
+     "command": "bb browser-automation --help 2>&1 | head -40",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "bb browser-automation --help 2>&1 | head -40"
+     }
+    }
+   }
+  },
+  {
+   "seq": 9764,
+   "type": "item/completed",
+   "createdAt": 1790166768499,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "item": {
+     "type": "commandExecution",
+     "id": "da3726555a-i707",
+     "command": "bb browser-automation --help 2>&1 | head -40",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "bb browser-automation — Persistent DevBrowser desktop and headless sessions\n\nSessions belong to the thread that opened them and expire after 30 minutes idle.\nA stopped or expired session cannot be resumed; open a new one.\n\nUsage:\n  bb browser-automation <command> [options]\n\nCommands:\n  bb browser-automation open        Open an isolated desktop or local headless session; --tab hands off an existing tab\n  bb browser-automation list        List this thread's browser sessions\n  bb browser-automation run         Run a trusted DevBrowser script; runs serialize per session\n  bb browser-automation pages       Inspect persistent named pages\n  bb browser-automation screenshot  Save a bounded JPEG in session tmp; return its path and host ID\n  bb browser-automation preview     Describe the live preview frame of a local headless session, without image bytes\n  bb browser-automation stop        Cancel queued and running work and release control; open a new session to resume\n  bb browser-automation close       Dispose owned browsers and tabs, preserving handed-off tabs\n\nRun `bb browser-automation <command> --help` for a command's arguments and options.",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "bb browser-automation --help 2>&1 | head -40"
+     }
+    }
+   }
+  },
+  {
+   "seq": 9765,
+   "type": "provider/error",
+   "createdAt": 1790166834744,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "message": "Provider error",
+    "detail": "Claude Code API retry 1/10 after 518ms: HTTP 500 server_error",
+    "willRetry": true,
+    "errorInfo": {
+     "category": "internal",
+     "providerCode": "server_error",
+     "httpStatusCode": 500
+    }
+   }
+  },
+  {
+   "seq": 9767,
+   "type": "item/started",
+   "createdAt": 1790166837438,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "item": {
+     "type": "commandExecution",
+     "id": "da3726555a-i708",
+     "command": "bb browser-automation open --help 2>&1 | head -30; bb browser-automation run --help 2>&1 | head -40; bb status 2>&1 | head -12",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "bb browser-automation open --help 2>&1 | head -30; bb browser-automation run --help 2>&1 | head -40; bb status 2>&1 | head -12"
+     }
+    }
+   }
+  },
+  {
+   "seq": 9768,
+   "type": "item/completed",
+   "createdAt": 1790166837986,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "item": {
+     "type": "commandExecution",
+     "id": "da3726555a-i708",
+     "command": "bb browser-automation open --help 2>&1 | head -30; bb browser-automation run --help 2>&1 | head -40; bb status 2>&1 | head -12",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "bb browser-automation open — Open an isolated desktop or local headless session; --tab hands off an existing tab\n\nUsage:\n  bb browser-automation open --backend <desktop|local> --machine <name-or-id> [--desktop <instance-id>] [--tab <tab-id>] [--headless] [--thread <id>] [--json]\n\nOptions:\n  --backend <desktop|local>  desktop drives a connected browser instance; local runs headless on the host (required)\n  --machine <name-or-id>     Host that runs the browser: exact ID or unambiguous name (required)\n  --desktop <instance-id>    Desktop instance to drive (desktop backend only)\n  --tab <tab-id>             Existing desktop tab to control instead of opening one (desktop backend only)\n  --headless                 Required by the local backend, rejected by desktop\n  --thread <id>              Thread that owns the session; defaults to the invoking thread and cannot name another\n  --json                     Emit machine-readable JSON\n  --help, -h                 Show this help and exit\nbb browser-automation run — Run a trusted DevBrowser script; runs serialize per session\n\nUsage:\n  bb browser-automation run <session-id> [--script <code>] [--script-file <path>] [--script-host <host-id>] [--timeout-ms <1000-120000>] [--timeout <duration>] [--thread <id>] [--json]\n\nScripts may return at most 4 screenshots per run, JPEG only, 500 KB combined;\nanything larger or in another format fails the run.\n\nArguments:\n  <session-id>  Session id returned by `bb browser-automation open` (required)\n\nOptions:\n  --script <code>             DevBrowser script source\n  --script-file <path>        File holding the script, read from --script-host\n  --script-host <host-id>     Host that holds --script-file\n  --timeout-ms <1000-120000>  Run timeout in milliseconds (default: 30000)\n  --timeout <duration>        Run timeout as a duration (90s, 2m, 1500ms); a bare number is seconds (1-120) or milliseconds (1000-120000)\n  --thread <id>               Thread that owns the session; defaults to the invoking thread and cannot name another\n  --json                      Emit machine-readable JSON\n  --help, -h                  Show this help and exit\n\nRules:\n  Exactly one of:  --script, --script-file\n  --script-file    requires --script-host\n  --script-host    requires --script-file\n  At most one of:  --timeout, --timeout-ms\nProject: Personal (proj_personal)\n\nThread: thr_4hbrvzczie\n  Status: active\n  Title: Add bb harness benchmarking plugin\n  Environment: Personal workspace (env_722wcp65ge)\n\nData dir: /Users/dev/.bb",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "bb browser-automation open --help 2>&1 | head -30; bb browser-automation run --help 2>&1 | head -40; bb status 2>&1 | head -12"
+     }
+    }
+   }
+  },
+  {
+   "seq": 9769,
+   "type": "item/started",
+   "createdAt": 1790166841196,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "item": {
+     "type": "reasoning",
+     "id": "da3726555a-i709",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 9770,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790166841196,
+   "data": {
+    "providerThreadId": "8c9eb03b-4c57-4cd3-a897-a7325454688d",
+    "itemId": "da3726555a-i709",
+    "delta": "Both med"
+   }
+  }
+ ]
+}

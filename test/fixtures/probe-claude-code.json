@@ -1,0 +1,339 @@
+{
+ "providerId": "claude-code",
+ "threadId": "thr_4trxxtm3n2",
+ "originKind": null,
+ "note": "Probe task: create, edit, run ok + failing command",
+ "events": [
+  {
+   "seq": 1,
+   "type": "client/turn/requested",
+   "createdAt": 1790360422124,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_pg7tc6yypw",
+    "source": "spawn",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "This is a short probe task for testing an event viewer. Keep it small and do not touch any other files.\n\n1. Create `probe/notes.md` containing exactly two lines: `alpha` and `beta`.\n2. Edit `probe/notes.md` so the second line reads `gamma` instead of `beta`.\n3. Run the shell command `cat probe/notes.md && ls probe`.\n4. Run the shell command `ls probe/does-not-exist` (it is expected to fail).\n5. Reply with one sentence saying what you did.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "thread-start"
+    },
+    "request": {
+     "method": "thread/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "claude-opus-5-5[1m]",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 18,
+   "type": "turn/started",
+   "createdAt": 1790360426171,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c"
+   }
+  },
+  {
+   "seq": 21,
+   "type": "item/started",
+   "createdAt": 1790360426171,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "fileChange",
+     "id": "daaa3f93ec-i1",
+     "changes": [
+      {
+       "path": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md",
+       "kind": "add",
+       "diff": "--- /dev/null\n+++ b/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md\n+alpha\n+beta\n"
+      }
+     ],
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Writing file",
+       "completed": "Wrote file"
+      },
+      "icon": {
+       "glyph": "EditFile"
+      },
+      "title": "notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 22,
+   "type": "item/completed",
+   "createdAt": 1790360426181,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "fileChange",
+     "id": "daaa3f93ec-i1",
+     "changes": [
+      {
+       "path": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md",
+       "kind": "add",
+       "diff": "--- /dev/null\n+++ b/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md\n+alpha\n+beta\n"
+      }
+     ],
+     "status": "completed",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Writing file",
+       "completed": "Wrote file"
+      },
+      "icon": {
+       "glyph": "EditFile"
+      },
+      "title": "notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 24,
+   "type": "item/started",
+   "createdAt": 1790360427959,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "fileChange",
+     "id": "daaa3f93ec-i2",
+     "changes": [
+      {
+       "path": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md",
+       "kind": "update",
+       "diff": "--- a/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md\n+++ b/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md\n-beta\n+gamma\n"
+      }
+     ],
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing file",
+       "completed": "Edited file"
+      },
+      "icon": {
+       "glyph": "EditFile"
+      },
+      "title": "notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 25,
+   "type": "item/completed",
+   "createdAt": 1790360428003,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "fileChange",
+     "id": "daaa3f93ec-i2",
+     "changes": [
+      {
+       "path": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md",
+       "kind": "update",
+       "diff": "--- a/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md\n+++ b/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_4trxxtm3n2-1/bb-plugin-thread-time-machine/probe/notes.md\n-beta\n+gamma\n"
+      }
+     ],
+     "status": "completed",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing file",
+       "completed": "Edited file"
+      },
+      "icon": {
+       "glyph": "EditFile"
+      },
+      "title": "notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 27,
+   "type": "item/started",
+   "createdAt": 1790360429476,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "commandExecution",
+     "id": "daaa3f93ec-i3",
+     "command": "cat probe/notes.md && ls probe",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cat probe/notes.md && ls probe"
+     }
+    }
+   }
+  },
+  {
+   "seq": 28,
+   "type": "item/completed",
+   "createdAt": 1790360429512,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "commandExecution",
+     "id": "daaa3f93ec-i3",
+     "command": "cat probe/notes.md && ls probe",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "alpha\ngamma\nnotes.md",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cat probe/notes.md && ls probe"
+     }
+    }
+   }
+  },
+  {
+   "seq": 30,
+   "type": "item/started",
+   "createdAt": 1790360429880,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "commandExecution",
+     "id": "daaa3f93ec-i4",
+     "command": "ls probe/does-not-exist",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "ls probe/does-not-exist"
+     }
+    }
+   }
+  },
+  {
+   "seq": 31,
+   "type": "item/completed",
+   "createdAt": 1790360429880,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "commandExecution",
+     "id": "daaa3f93ec-i4",
+     "command": "ls probe/does-not-exist",
+     "cwd": "",
+     "status": "failed",
+     "approvalStatus": null,
+     "aggregatedOutput": "Exit code 1\nls: probe/does-not-exist: No such file or directory",
+     "exitCode": 1,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "ls probe/does-not-exist"
+     }
+    }
+   }
+  },
+  {
+   "seq": 32,
+   "type": "item/started",
+   "createdAt": 1790360431399,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "agentMessage",
+     "id": "daaa3f93ec-i5",
+     "text": ""
+    }
+   }
+  },
+  {
+   "seq": 33,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790360431399,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "itemId": "daaa3f93ec-i5",
+    "delta": "I created `probe/notes"
+   }
+  },
+  {
+   "seq": 34,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790360431408,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "itemId": "daaa3f93ec-i5",
+    "delta": ".md` with `alpha` and `beta`, then changed `beta` to `gamma`; `cat` showed `alpha` and `gamma` and `ls probe` listed only `notes.md`, and `ls probe/does-not-exist` failed with exit code 1 as expected."
+   }
+  },
+  {
+   "seq": 36,
+   "type": "item/completed",
+   "createdAt": 1790360431408,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "item": {
+     "type": "agentMessage",
+     "id": "daaa3f93ec-i5",
+     "text": "I created `probe/notes.md` with `alpha` and `beta`, then changed `beta` to `gamma`; `cat` showed `alpha` and `gamma` and `ls probe` listed only `notes.md`, and `ls probe/does-not-exist` failed with exit code 1 as expected."
+    }
+   }
+  },
+  {
+   "seq": 39,
+   "type": "turn/completed",
+   "createdAt": 1790360431413,
+   "data": {
+    "providerThreadId": "faad82a2-92f6-4516-bdcb-e7625440961c",
+    "status": "completed",
+    "providerCheckpointId": "a1268723-2e2b-4f3c-89b6-8f8bdc732b4c"
+   }
+  }
+ ]
+}

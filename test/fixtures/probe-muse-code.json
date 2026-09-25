@@ -1,0 +1,409 @@
+{
+ "providerId": "muse-code",
+ "threadId": "thr_unuprzn9ay",
+ "originKind": null,
+ "note": "Probe task: create, edit, run ok + failing command",
+ "events": [
+  {
+   "seq": 1,
+   "type": "client/turn/requested",
+   "createdAt": 1790360425787,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_f7kq3ajer6",
+    "source": "spawn",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "This is a short probe task for testing an event viewer. Keep it small and do not touch any other files.\n\n1. Create `probe/notes.md` containing exactly two lines: `alpha` and `beta`.\n2. Edit `probe/notes.md` so the second line reads `gamma` instead of `beta`.\n3. Run the shell command `cat probe/notes.md && ls probe`.\n4. Run the shell command `ls probe/does-not-exist` (it is expected to fail).\n5. Reply with one sentence saying what you did.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "thread-start"
+    },
+    "request": {
+     "method": "thread/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "muse-spark-1.3",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 16,
+   "type": "turn/started",
+   "createdAt": 1790360428239,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2"
+   }
+  },
+  {
+   "seq": 21,
+   "type": "item/started",
+   "createdAt": 1790360431939,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "toolCall",
+     "id": "dada99b287-i1",
+     "tool": "bash",
+     "arguments": {
+      "command": "pwd; ls -la",
+      "description": "List workspace files"
+     },
+     "status": "pending",
+     "presentation": {
+      "label": {
+       "pending": "Running bash",
+       "completed": "Ran bash"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 22,
+   "type": "item/completed",
+   "createdAt": 1790360432008,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "toolCall",
+     "id": "dada99b287-i1",
+     "tool": "bash",
+     "arguments": {
+      "command": "pwd; ls -la",
+      "description": "List workspace files"
+     },
+     "status": "completed",
+     "result": "/Users/dev/.bb/plugins/environment-git-worktree/host-data/worktrees/thr_unuprzn9ay-1/bb-plugin-thread-time-machine\ntotal 368\ndrwxr-xr-x@ 16 dev  staff    512 Sep 25 19:20 .\ndrwxr-xr-x   4 dev  staff    128 Sep 25 19:20 ..\n-rw-r--r--@  1 dev  staff    114 Sep 25 19:20 .git\n-rw-r--r--@  1 dev  staff     20 Sep 25 19:20 .gitignore\n-rw-r--r--@  1 dev  staff   1137 Sep 25 19:20 PLUGIN_OVERVIEW.md\n-rw-r--r--@  1 dev  staff   2427 Sep 25 19:20 README.md\n-rw-r--r--@  1 dev  staff  37057 Sep 25 19:20 app.tsx\ndrwxr-xr-x@  3 dev  staff     96 Sep 25 19:20 components\n-rw-r--r--@  1 dev  staff    494 Sep 25 19:20 components.json\ndrwxr-xr-x@  3 dev  staff     96 Sep 25 19:20 hooks\ndrwxr-xr-x@  4 dev  staff    128 Sep 25 19:20 lib\n-rw-r--r--@  1 dev  staff  95576 Sep 25 19:20 package-lock.json\n-rw-r--r--@  1 dev  staff   1569 Sep 25 19:20 package.json\n-rw-r--r--@  1 dev  staff  16878 Sep 25 19:20 server.ts\ndrwxr-xr-x@  3 dev  staff     96 Sep 25 19:20 skills\n-rw-r--r--@  1 dev  staff    439 Sep 25 19:20 tsconfig.json\n",
+     "presentation": {
+      "label": {
+       "pending": "Running bash",
+       "completed": "Ran bash"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 26,
+   "type": "item/started",
+   "createdAt": 1790360434854,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "fileChange",
+     "id": "dada99b287-i2",
+     "changes": [
+      {
+       "path": "probe/notes.md",
+       "kind": "update"
+      }
+     ],
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing",
+       "completed": "Edited"
+      },
+      "icon": {
+       "glyph": "FileDiff"
+      },
+      "title": "probe/notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 27,
+   "type": "item/completed",
+   "createdAt": 1790360434854,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "fileChange",
+     "id": "dada99b287-i2",
+     "changes": [
+      {
+       "path": "probe/notes.md",
+       "kind": "update"
+      }
+     ],
+     "status": "completed",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing",
+       "completed": "Edited"
+      },
+      "icon": {
+       "glyph": "FileDiff"
+      },
+      "title": "probe/notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 31,
+   "type": "item/started",
+   "createdAt": 1790360437533,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "fileChange",
+     "id": "dada99b287-i3",
+     "changes": [
+      {
+       "path": "probe/notes.md",
+       "kind": "update"
+      }
+     ],
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing",
+       "completed": "Edited"
+      },
+      "icon": {
+       "glyph": "FileDiff"
+      },
+      "title": "probe/notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 32,
+   "type": "item/completed",
+   "createdAt": 1790360437542,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "fileChange",
+     "id": "dada99b287-i3",
+     "changes": [
+      {
+       "path": "probe/notes.md",
+       "kind": "update"
+      }
+     ],
+     "status": "completed",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing",
+       "completed": "Edited"
+      },
+      "icon": {
+       "glyph": "FileDiff"
+      },
+      "title": "probe/notes.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 36,
+   "type": "item/started",
+   "createdAt": 1790360439150,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "toolCall",
+     "id": "dada99b287-i4",
+     "tool": "bash",
+     "arguments": {
+      "command": "cat probe/notes.md && ls probe",
+      "description": "Show notes and list probe"
+     },
+     "status": "pending",
+     "presentation": {
+      "label": {
+       "pending": "Running bash",
+       "completed": "Ran bash"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 37,
+   "type": "item/completed",
+   "createdAt": 1790360439150,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "toolCall",
+     "id": "dada99b287-i4",
+     "tool": "bash",
+     "arguments": {
+      "command": "cat probe/notes.md && ls probe",
+      "description": "Show notes and list probe"
+     },
+     "status": "completed",
+     "result": "alpha\ngamma\nnotes.md\n",
+     "presentation": {
+      "label": {
+       "pending": "Running bash",
+       "completed": "Ran bash"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 41,
+   "type": "item/started",
+   "createdAt": 1790360442119,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "toolCall",
+     "id": "dada99b287-i5",
+     "tool": "bash",
+     "arguments": {
+      "command": "ls probe/does-not-exist",
+      "description": "List missing probe path"
+     },
+     "status": "pending",
+     "presentation": {
+      "label": {
+       "pending": "Running bash",
+       "completed": "Ran bash"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 42,
+   "type": "item/completed",
+   "createdAt": 1790360442119,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "toolCall",
+     "id": "dada99b287-i5",
+     "tool": "bash",
+     "arguments": {
+      "command": "ls probe/does-not-exist",
+      "description": "List missing probe path"
+     },
+     "status": "failed",
+     "result": "ls: probe/does-not-exist: No such file or directory\n",
+     "presentation": {
+      "label": {
+       "pending": "Running bash",
+       "completed": "Ran bash"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 43,
+   "type": "item/started",
+   "createdAt": 1790360445145,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "agentMessage",
+     "id": "dada99b287-i6",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 44,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790360445145,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "itemId": "dada99b287-i6",
+    "delta": "Created probe/notes.md with alpha/g"
+   }
+  },
+  {
+   "seq": 45,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790360445145,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "itemId": "dada99b287-i6",
+    "delta": "amma, verified its contents, and confirmed the missing path fails as expected."
+   }
+  },
+  {
+   "seq": 46,
+   "type": "item/completed",
+   "createdAt": 1790360445145,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "item": {
+     "type": "agentMessage",
+     "id": "dada99b287-i6",
+     "text": "Created probe/notes.md with alpha/gamma, verified its contents, and confirmed the missing path fails as expected.",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 50,
+   "type": "turn/completed",
+   "createdAt": 1790360457325,
+   "data": {
+    "providerThreadId": "01a0d9cc-1d51-7820-a005-86696a503df2",
+    "status": "completed"
+   }
+  }
+ ]
+}

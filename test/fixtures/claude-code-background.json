@@ -1,0 +1,469 @@
+{
+ "providerId": "claude-code",
+ "threadId": "thr_3w4ufj876w",
+ "originKind": null,
+ "note": "claude-code backgroundTask progress/completed without item/started",
+ "events": [
+  {
+   "seq": 1060,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790243795442,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "itemId": "da77d2c3f3-i434",
+    "delta": "This is a solid report,"
+   }
+  },
+  {
+   "seq": 1063,
+   "type": "item/completed",
+   "createdAt": 1790243795442,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "reasoning",
+     "id": "da77d2c3f3-i434",
+     "summary": [],
+     "content": [
+      "This is a solid report, but I want to spot-check a few key claims before passing it along: whether consumeSSE and consumeChatSSE are truly byte-identical, the timeout bug around Google streaming being capped by chat timeout, the eino provider misrouting to Google, and eino's single-attempt invocation behavior. I'll verify these while the other agents continue working.\n\n"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 1065,
+   "type": "item/started",
+   "createdAt": 1790243795523,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i435",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- sse.go\"; sed -n 1,60p utils/sse.go; echo \"--- chat_direct consumeChatSSE\"; sed -n 2595,2660p utils/chat_direct.go",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- sse.go\"; sed -n 1,60p utils/sse.go; echo \"-…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1066,
+   "type": "item/completed",
+   "createdAt": 1790243795523,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i435",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- sse.go\"; sed -n 1,60p utils/sse.go; echo \"--- chat_direct consumeChatSSE\"; sed -n 2595,2660p utils/chat_direct.go",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "--- sse.go\npackage utils\n\nimport (\n\t\"bufio\"\n\t\"errors\"\n\t\"io\"\n\t\"strings\"\n)\n\nvar errSSEDone = errors.New(\"sse stream completed\")\n\nfunc consumeSSE(body io.Reader, onEvent func(eventType, data string) error) error {\n\treader := bufio.NewReader(body)\n\teventType := \"\"\n\tdataLines := make([]string, 0, 2)\n\trawJSONLines := make([]string, 0, 2)\n\tsawSSEField := false\n\n\tflush := func() error {\n\t\tif len(dataLines) == 0 {\n\t\t\teventType = \"\"\n\t\t\treturn nil\n\t\t}\n\t\tdata := strings.Join(dataLines, \"\\n\")\n\t\tdataLines = dataLines[:0]\n\t\terr := onEvent(eventType, data)\n\t\teventType = \"\"\n\t\treturn err\n\t}\n\n\tfor {\n\t\tline, err := reader.ReadString('\\n')\n\t\tif err != nil && !errors.Is(err, io.EOF) {\n\t\t\treturn err\n\t\t}\n\n\t\tif line != \"\" {\n\t\t\tline = strings.TrimRight(line, \"\\r\\n\")\n\t\t\tif line == \"\" {\n\t\t\t\tif flushErr := flush(); flushErr != nil {\n\t\t\t\t\tif errors.Is(flushErr, errSSEDone) {\n\t\t\t\t\t\treturn nil\n\t\t\t\t\t}\n\t\t\t\t\treturn flushErr\n\t\t\t\t}\n\t\t\t} else if strings.HasPrefix(line, \":\") {\n\t\t\t\tsawSSEField = true\n\t\t\t\t// SSE comment line\n\t\t\t} else if strings.HasPrefix(line, \"event:\") {\n\t\t\t\tsawSSEField = true\n\t\t\t\teventType = strings.TrimSpace(strings.TrimPrefix(line, \"event:\"))\n\t\t\t} else if strings.HasPrefix(line, \"data:\") {\n\t\t\t\tsawSSEField = true\n\t\t\t\tdata := strings.TrimPrefix(line, \"data:\")\n\t\t\t\tif strings.HasPrefix(data, \" \") {\n\t\t\t\t\tdata = data[1:]\n\t\t\t\t}\n\t\t\t\tdataLines = append(dataLines, data)\n\t\t\t} else if !sawSSEField {\n\t\t\t\ttrimmed := strings.TrimSpace(line)\n--- chat_direct consumeChatSSE\n\t}\n}\n\nfunc consumeChatSSE(body io.Reader, onEvent func(eventType, data string) error) error {\n\treader := bufio.NewReader(body)\n\teventType := \"\"\n\tdataLines := make([]string, 0, 2)\n\trawJSONLines := make([]string, 0, 2)\n\tsawSSEField := false\n\n\tflush := func() error {\n\t\tif len(dataLines) == 0 {\n\t\t\teventType = \"\"\n\t\t\treturn nil\n\t\t}\n\t\tdata := strings.Join(dataLines, \"\\n\")\n\t\tdataLines = dataLines[:0]\n\t\terr := onEvent(eventType, data)\n\t\teventType = \"\"\n\t\treturn err\n\t}\n\n\tfor {\n\t\tline, err := reader.ReadString('\\n')\n\t\tif err != nil && !errors.Is(err, io.EOF) {\n\t\t\treturn err\n\t\t}\n\n\t\tif line != \"\" {\n\t\t\tline = strings.TrimRight(line, \"\\r\\n\")\n\t\t\tif line == \"\" {\n\t\t\t\tif flushErr := flush(); flushErr != nil {\n\t\t\t\t\tif errors.Is(flushErr, errChatSSEDone) {\n\t\t\t\t\t\treturn nil\n\t\t\t\t\t}\n\t\t\t\t\treturn flushErr\n\t\t\t\t}\n\t\t\t} else if strings.HasPrefix(line, \":\") {\n\t\t\t\tsawSSEField = true\n\t\t\t\t// SSE comment line\n\t\t\t} else if strings.HasPrefix(line, \"event:\") {\n\t\t\t\tsawSSEField = true\n\t\t\t\teventType = strings.TrimSpace(strings.TrimPrefix(line, \"event:\"))\n\t\t\t} else if strings.HasPrefix(line, \"data:\") {\n\t\t\t\tsawSSEField = true\n\t\t\t\tdata := strings.TrimPrefix(line, \"data:\")\n\t\t\t\tif strings.HasPrefix(data, \" \") {\n\t\t\t\t\tdata = data[1:]\n\t\t\t\t}\n\t\t\t\tdataLines = append(dataLines, data)\n\t\t\t} else if !sawSSEField {\n\t\t\t\ttrimmed := strings.TrimSpace(line)\n\t\t\t\tif len(rawJSONLines) > 0 || strings.HasPrefix(trimmed, \"{\") || strings.HasPrefix(trimmed, \"[\") {\n\t\t\t\t\trawJSONLines = append(rawJSONLines, line)\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tif errors.Is(err, io.EOF) {\n\t\t\tif flushErr := flush();\n…[fixture truncated]",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- sse.go\"; sed -n 1,60p utils/sse.go; echo \"-…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1068,
+   "type": "item/started",
+   "createdAt": 1790243797826,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i436",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- eino config normalize\"; sed -n 55,115p eino_runtime/config.go; echo \"--- eino model invoker\"; sed -n 100,135p eino_runtime/model.go; echo \"--- postChatDirectSSE users\"; /usr/bin/grep -n 'postChatDirectSSE\\|func postGoogleGenerateContentSSE\\|CHAT_DIRECT_TIMEOUT_MS' utils/*.go | /usr/bin/grep -v _test",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- eino config normalize\"; sed -n 55,115p eino…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1069,
+   "type": "item/completed",
+   "createdAt": 1790243798161,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i436",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- eino config normalize\"; sed -n 55,115p eino_runtime/config.go; echo \"--- eino model invoker\"; sed -n 100,135p eino_runtime/model.go; echo \"--- postChatDirectSSE users\"; /usr/bin/grep -n 'postChatDirectSSE\\|func postGoogleGenerateContentSSE\\|CHAT_DIRECT_TIMEOUT_MS' utils/*.go | /usr/bin/grep -v _test",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "--- eino config normalize\n\treturn c\n}\n\nfunc NormalizeProvider(provider, model string) string {\n\tprovider = strings.ToLower(strings.TrimSpace(provider))\n\tprovider = strings.TrimPrefix(provider, \"eino/\")\n\tprovider = strings.ReplaceAll(provider, \"_\", \"-\")\n\tswitch provider {\n\tcase \"openrouter\":\n\t\treturn ProviderOpenRouter\n\tcase \"azure\", \"azure-openai\":\n\t\treturn ProviderAzure\n\tcase \"google-paxton-reed\", \"google (user@example.com)\":\n\t\treturn ProviderGooglePaxtonReed\n\tcase \"google-acme\", \"google (user@example.com)\":\n\t\treturn ProviderGoogleacme\n\tcase \"google\", \"gemini\":\n\t\treturn ProviderGoogle\n\tcase \"openai\", \"openai-compatible\", \"openai-compatible-provider\":\n\t\treturn ProviderOpenAICompatible\n\t}\n\n\tmodel = strings.ToLower(strings.TrimSpace(model))\n\tswitch {\n\tcase strings.HasPrefix(model, \"gemini-\"), strings.HasPrefix(model, \"models/gemini-\"):\n\t\treturn ProviderGoogle\n\tcase isGPTFamilyModel(model), strings.HasPrefix(model, \"o1\"), strings.HasPrefix(model, \"o3\"), strings.HasPrefix(model, \"o4\"):\n\t\treturn ProviderAzure\n\tdefault:\n\t\treturn ProviderGoogle\n\t}\n}\n\nfunc isGPTFamilyModel(model string) bool {\n\tbaseModel := strings.ToLower(strings.TrimSpace(model))\n\tif separator := strings.Index(baseModel, \"::\"); separator > 0 {\n\t\tbaseModel = baseModel[:separator]\n\t}\n\treturn strings.HasPrefix(baseModel, \"gpt-\") ||\n\t\tstrings.HasPrefix(baseModel, \"chatgpt-\") ||\n\t\tstrings.HasPrefix(baseModel, \"azuregpt-\")\n}\n\nfunc ProviderForDirectRuntime(provider string) string {\n\tswitch NormalizeProvider(provider, \"\") {\n\tcase ProviderGooglePaxtonReed:\n\t\treturn utils.GooglePaxtonReedProvider\n\tcase ProviderGoogleacme:\n\t\treturn utils.GoogleacmeProvider\n\tcase ProviderOpenRouter:\n\t\treturn \"OpenRouter\"\n\tcase ProviderAzure:\n\t\treturn \"Azure\"\n\tcase ProviderOpenAICompatible:\n\t\treturn \"OpenAI\"\n\tdefault:\n\t\treturn \"Google\"\n\t}\n}\n\nfunc ModelWithThinking(model, thinking string) string {\n--- eino model invoker\n\t\tImages:       append([]string(nil), m.Images...),\n\t\tUserID:       m.UserID,\n\t\tRequestID:    m.RequestID,\n\t}\n}\n\nfunc (m DirectChatModel) defaultInvoker(ctx context.Context, req InvokeRequest, onDelta func(string) error) (string, error) {\n\tcfg := req.Config.Normalized()\n\tpayload := models.LLMPayload{\n\t\tSystemPrompt: req.SystemPrompt,\n\t\tUserPrompt:   req.UserPrompt,\n\t\tTemperature:  cfg.Temperature,\n\t\tProvider:     ProviderForDirectRuntime(cfg.Provider),\n\t\tModel:        ModelWithThinking(cfg.Model, cfg.Thinking),\n\t\tStream:       onDelta != nil,\n\t\tUseTools:     cfg.ToolsEnabled || cfg.SearchEnabled,\n\t\tImages:       req.Images,\n\t\tUserID:       req.UserID,\n\t\tQuizID:       req.RequestID,\n\t}\n\tc := contextGin(m.GinContext, ctx)\n\tif onDelta != nil {\n\t\treturn utils.InvokeMarkingDirectWithDelta(c, payload, req.UserID, req.RequestID, nil, onDelta)\n\t}\n\treturn utils.InvokeMarkingDirect(c, payload, false, req.UserID, req.RequestID, nil)\n}\n\nfunc InvokeWithFallback(ctx context.Context, req InvokeRequest, failover []ModelChoice, invoker DirectInvoker, onDelta func(string) error) (string, error) {\n\treturn invokeWithFal\n…[fixture truncated]",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && echo \"--- eino config normalize\"; sed -n 55,115p eino…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1070,
+   "type": "item/started",
+   "createdAt": 1790243799466,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "toolCall",
+     "id": "da77d2c3f3-i437",
+     "tool": "SubagentHandback",
+     "arguments": {
+      "message": "# AI call paths outside handlers/ and utils/\n\nAll paths below are relative to `/Users/dev/Documents/acmeacme/acme_api/`.\n\n**What I found:** there are three kinds of path.\n- **(A)** Programs with their own raw `net/http` provider clients: `course_creator.go`, `pdf_course_creator.go`, `scripts/practicepaper`, `eino_maths_suggestion_questions/internal/einopipeline`, and `tools/*`.\n- **(B)** Programs that reuse `utils.InvokeMarkingDirect*` or `handlers.CallGPT` / `handlers.GenerateGeminiContent`. They reach it through three different fake-`gin.Context` hacks.\n- **(C)** Two separate eino adapter layers: `eino_runtime/` (a thin wrapper over utils) and eino_maths `einopipeline` (a fully bespoke copy).\n\neino_maths is a separate module, but the root module imports it: `go.mod:71`, replace at `:210`, and `handlers/eino_maths_suggestion_jobs.go:16`. That means its bespoke adapters run in the production worker (`main.go:178`).\n\n## Per-program table\n\n| Program/pkg | Call fn | Provider | Transport | Model selection | Endpoint/key env | Retry | Timeout | JSON parse |\n|---|---|---|---|---|---|---|---|---|\n| `course_creator.go` (tag `ignore\\|\\|coursecreator`) | `callGemini` :1782, `callAzureWithSettings` :2131, pool dispatcher `callAIStep` :2387 | Gemini (AI Studio/Vertex); Azure chat-completions + Responses API (only when search is on) | own HTTP; Google URL/headers from `utils.ResolveGoogleGenerateContentTarget` :1801 plus the `utils.GoogleVertexFallback*` helpers | consts :69-110; flags `--azure-*-model/-thinking`, `--model` (per-step `model::thinking`) | `AZURE_OPENAI_{,GPT5_}ENDPOINT/API_KEY`, `GPT5x_DEPLOYMENT` :2015-2049 | own: `backoffWithJitter` :1735, `parseRetryAfter` :1763, 8 attempts; round-robin failover between providers :2387 | per-step `context.WithTimeout` :205 (8–20 min) | own `extractJSON` :2502; re-prompt on parse failure :4187, :4297 |\n| `pdf_course_creator.go` (ignore) | `callPDFCourseAzure` :3754 | Azure chat | own HTTP | consts :57-60 + cobra flags | same env as above, copy-pasted :3819-3857 | own loop :3770, `pdfCourseBackoff` :3947 (no jitter or Retry-After) | 20 min :67 | `extractPDFCourseJSON` :3369, `pdfJSONArrayCandidates` :2528 |\n| `practice_paper_creator.go` + `scripts/practicepaper` | `AzureLLMClient.Complete` llm.go:43 | Azure chat or Responses (Responses forced for gpt-5.4/5.5, :155) | own HTTP | flag `--azure-model` (default gpt-5.4) | `AZURE_OPENAI_{GPT54→GPT5→base}_*` llm.go:142-148 | **none** | `azureStepTimeout` llm.go:107 | `extractJSON` ai_steps.go:473, `stripCodeFence` svg_image.go:2312 |\n| same (answers) | `MathsConsensusAnswerGenerator` answers.go:17 → mathsanswercheck | Azure + Google via utils | reuses utils | hardcoded answers.go:30-40 | utils | none | utils | — |\n| `scripts/internal/mathsanswercheck` | `callScriptLLMWithContext` :153 (`&gin.Context{Request}` hack) | any | `utils.InvokeMarkingDirect` | caller's `LLMConfig` | utils | content retry `retryIfUnusable` :219 | none of its own | `utils.ExtractAndStripReas\n…[fixture truncated]"
+     },
+     "status": "pending",
+     "presentation": {
+      "label": {
+       "pending": "Running SubagentHandback",
+       "completed": "Ran SubagentHandback"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     },
+     "parentToolCallId": "da77d2c3f3-i35"
+    }
+   }
+  },
+  {
+   "seq": 1072,
+   "type": "item/completed",
+   "createdAt": 1790243799588,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "agentMessage",
+     "id": "da77d2c3f3-i438",
+     "text": "I've sent the report to the parent agent. There is no single \"call a model\" path. Four dispatch switches in `utils` each pick the provider, plus eino's own, and each has its own request builders and retry loops. Underneath, three JSON POST helpers and two SSE POST helpers are near-copies that differ in small ways. `utils/provider.go` is 25 lines and only fills in a missing provider.\n\nThree findings look like real bugs rather than just duplication:\n- **Marking timeout:** marking's Google streaming and the Google tool path send through the chat helper. That caps them at `CHAT_DIRECT_TIMEOUT_MS` (max 600s) even when `MARKING_DIRECT_TIMEOUT_MS` is raised (up to 30 minutes).\n- **eino misroutes providers:** `eino_runtime` quietly sends Anthropic, Groq, Nvidia, NetMind and the Google AI Studio account to Google. It also makes a single attempt through `InvokeMarkingDirect` with its own failover loop, so it skips Vertex routing, the retry budget and backoff. Its only user is quiz streaming in `handlers/gpt_quiz_eino.go`.\n- **Wrong Google account:** the moderation classifier and research Google calls never set the Google account, so the named \"Google (info@…)\" accounts fall back to the default backend there.\n\nThe rest of the report covers:\n- **Model selection:** there is one database resolver, `ResolveModelPlan`, which runs when a prompt is loaded. Several hardcoded defaults and env overrides sit alongside it. Vertex weighted routing only applies inside the four `Invoke*WithFallback*` functions. The main marking loop in `mark.go`, eino, research and moderation don't use it.\n- **Cross-cutting concerns:** no shared invoker writes prompt logs, runs moderation or sends errors to Sentry. Callers do that themselves, and only moderation reports to Sentry. There is no token or cost tracking and no OTel anywhere in `utils`. Azure config is resolved in three places, and chat and marking read the endpoint env vars in opposite order.\n- **Duplication:** about 19 duplicated pieces, with file:line pairs. The clearest is two SSE parsers that are byte-identical (`sse.go:12` and `chat_direct.go:2598`).\n\n`InvokeLambdaWithFallback` (`lambda.go:750`) has no callers. Several handlers also call providers directly, outside the shared layer: Gemini, Azure, transcribe, speech, genkit and the separate eino maths pipeline.",
+     "parentToolCallId": "da77d2c3f3-i14"
+    }
+   }
+  },
+  {
+   "seq": 1074,
+   "type": "item/backgroundTask/completed",
+   "createdAt": 1790243799702,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "backgroundTask",
+     "id": "da77d2c3f3-i15",
+     "familyId": "a04361dfd338fd221",
+     "taskType": "local_agent",
+     "description": "Map shared AI runtime layer",
+     "status": "completed",
+     "taskStatus": "completed",
+     "skipTranscript": false,
+     "usage": {
+      "totalTokens": 221204,
+      "toolUses": 79,
+      "durationMs": 391595
+     },
+     "summary": "This agent's report was delivered to you as a message from \"a04361dfd338fd221\" (its SubagentHandback call). Read it there; it is not repeated here.\n",
+     "outputFile": "/private/tmp/claude-501/-Users-dev-Documents-From-M1-Pro-Home-LA-acme-NextJS---Golang-acme-api/b9aa911b-8b98-4be7-ad8f-643f97bdabe5/tasks/a04361dfd338fd221.output",
+     "presentation": {
+      "label": {
+       "pending": "Running background agent",
+       "completed": "Background agent finished"
+      },
+      "icon": {
+       "glyph": "UserRound"
+      },
+      "title": "Map shared AI runtime layer"
+     },
+     "parentToolCallId": "da77d2c3f3-i14"
+    }
+   }
+  },
+  {
+   "seq": 1075,
+   "type": "item/completed",
+   "createdAt": 1790243800650,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "toolCall",
+     "id": "da77d2c3f3-i437",
+     "tool": "SubagentHandback",
+     "arguments": {
+      "message": "# AI call paths outside handlers/ and utils/\n\nAll paths below are relative to `/Users/dev/Documents/acmeacme/acme_api/`.\n\n**What I found:** there are three kinds of path.\n- **(A)** Programs with their own raw `net/http` provider clients: `course_creator.go`, `pdf_course_creator.go`, `scripts/practicepaper`, `eino_maths_suggestion_questions/internal/einopipeline`, and `tools/*`.\n- **(B)** Programs that reuse `utils.InvokeMarkingDirect*` or `handlers.CallGPT` / `handlers.GenerateGeminiContent`. They reach it through three different fake-`gin.Context` hacks.\n- **(C)** Two separate eino adapter layers: `eino_runtime/` (a thin wrapper over utils) and eino_maths `einopipeline` (a fully bespoke copy).\n\neino_maths is a separate module, but the root module imports it: `go.mod:71`, replace at `:210`, and `handlers/eino_maths_suggestion_jobs.go:16`. That means its bespoke adapters run in the production worker (`main.go:178`).\n\n## Per-program table\n\n| Program/pkg | Call fn | Provider | Transport | Model selection | Endpoint/key env | Retry | Timeout | JSON parse |\n|---|---|---|---|---|---|---|---|---|\n| `course_creator.go` (tag `ignore\\|\\|coursecreator`) | `callGemini` :1782, `callAzureWithSettings` :2131, pool dispatcher `callAIStep` :2387 | Gemini (AI Studio/Vertex); Azure chat-completions + Responses API (only when search is on) | own HTTP; Google URL/headers from `utils.ResolveGoogleGenerateContentTarget` :1801 plus the `utils.GoogleVertexFallback*` helpers | consts :69-110; flags `--azure-*-model/-thinking`, `--model` (per-step `model::thinking`) | `AZURE_OPENAI_{,GPT5_}ENDPOINT/API_KEY`, `GPT5x_DEPLOYMENT` :2015-2049 | own: `backoffWithJitter` :1735, `parseRetryAfter` :1763, 8 attempts; round-robin failover between providers :2387 | per-step `context.WithTimeout` :205 (8–20 min) | own `extractJSON` :2502; re-prompt on parse failure :4187, :4297 |\n| `pdf_course_creator.go` (ignore) | `callPDFCourseAzure` :3754 | Azure chat | own HTTP | consts :57-60 + cobra flags | same env as above, copy-pasted :3819-3857 | own loop :3770, `pdfCourseBackoff` :3947 (no jitter or Retry-After) | 20 min :67 | `extractPDFCourseJSON` :3369, `pdfJSONArrayCandidates` :2528 |\n| `practice_paper_creator.go` + `scripts/practicepaper` | `AzureLLMClient.Complete` llm.go:43 | Azure chat or Responses (Responses forced for gpt-5.4/5.5, :155) | own HTTP | flag `--azure-model` (default gpt-5.4) | `AZURE_OPENAI_{GPT54→GPT5→base}_*` llm.go:142-148 | **none** | `azureStepTimeout` llm.go:107 | `extractJSON` ai_steps.go:473, `stripCodeFence` svg_image.go:2312 |\n| same (answers) | `MathsConsensusAnswerGenerator` answers.go:17 → mathsanswercheck | Azure + Google via utils | reuses utils | hardcoded answers.go:30-40 | utils | none | utils | — |\n| `scripts/internal/mathsanswercheck` | `callScriptLLMWithContext` :153 (`&gin.Context{Request}` hack) | any | `utils.InvokeMarkingDirect` | caller's `LLMConfig` | utils | content retry `retryIfUnusable` :219 | none of its own | `utils.ExtractAndStripReas\n…[fixture truncated]"
+     },
+     "status": "completed",
+     "result": "{\"success\":true,\"message\":\"Report delivered to your caller.\"}",
+     "presentation": {
+      "label": {
+       "pending": "Running SubagentHandback",
+       "completed": "Ran SubagentHandback"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      }
+     },
+     "parentToolCallId": "da77d2c3f3-i35"
+    }
+   }
+  },
+  {
+   "seq": 1077,
+   "type": "item/started",
+   "createdAt": 1790243800854,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i439",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 125,150p utils/chat_direct.go; sed -n 2536,2570p utils/chat_direct.go; /usr/bin/grep -n 'MARKING_DIRECT_TIMEOUT_MS' utils/*.go | /usr/bin/grep -v _test | head",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 125,150p utils/chat_direct.go; sed -n 2536,257…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1078,
+   "type": "item/completed",
+   "createdAt": 1790243801118,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i439",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 125,150p utils/chat_direct.go; sed -n 2536,2570p utils/chat_direct.go; /usr/bin/grep -n 'MARKING_DIRECT_TIMEOUT_MS' utils/*.go | /usr/bin/grep -v _test | head",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "\treturn envBoolDefault(\"DISABLE_CHAT_FALLBACK_MODELS\", false)\n}\n\nfunc getChatDisableRetry() bool {\n\treturn envBoolDefault(\"DISABLE_CHAT_RETRY\", false)\n}\n\nfunc getChatDirectTimeout() time.Duration {\n\traw := strings.TrimSpace(os.Getenv(\"CHAT_DIRECT_TIMEOUT_MS\"))\n\tif raw == \"\" {\n\t\treturn defaultMarkingDirectTimeout\n\t}\n\tparsed, err := strconv.Atoi(raw)\n\tif err != nil || parsed < 1000 {\n\t\treturn defaultMarkingDirectTimeout\n\t}\n\tif parsed > 600000 {\n\t\tparsed = 600000\n\t}\n\treturn time.Duration(parsed) * time.Millisecond\n}\n\nfunc shouldEmitChatDirectCloudWatchMetric() bool {\n\tif envBoolDefault(\"DISABLE_CLOUDWATCH\", false) {\n\t\treturn false\n\t}\n}\n\nfunc postChatDirectSSE(ctx context.Context, endpoint string, headers map[string]string, payload interface{}) (*http.Response, error) {\n\treturn postGoogleGenerateContentSSE(ctx, endpoint, headers, payload, getChatDirectTimeout())\n}\n\n// PostGoogleGenerateContentSSE starts a Google generate-content SSE request.\n// Callers own the returned response body. The explicit timeout lets long-running\n// multimodal requests use their own deadline without changing chat defaults.\nfunc PostGoogleGenerateContentSSE(ctx context.Context, endpoint string, headers map[string]string, payload interface{}, timeout time.Duration) (*http.Response, error) {\n\treturn postGoogleGenerateContentSSE(ctx, endpoint, headers, payload, timeout)\n}\n\nfunc postGoogleGenerateContentSSE(ctx context.Context, endpoint string, headers map[string]string, payload interface{}, timeout time.Duration) (*http.Response, error) {\n\tApplyGoogleVertexBillingLabels(ctx, endpoint, payload)\n\n\tbody, err := json.Marshal(payload)\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"failed to encode request body: %w\", err)\n\t}\n\n\tcurrentEndpoint := endpoint\n\tclient := NewDirectHTTPClient(timeout)\n\tfor {\n\t\treq, err := http.NewRequestWithContext(ctx, http.MethodPost, currentEndpoint, bytes.NewReader(body))\n\t\tif err != nil {\n\t\t\treturn nil, fmt.Errorf(\"failed to create request: %w\", err)\n\t\t}\n\t\treq.Header.Set(\"Content-Type\", \"application/json\")\n\t\treq.Header.Set(\"Accept\", \"text/event-stream\")\n\t\tfor k, v := range headers {\n\t\t\tif strings.TrimSpace(k) == \"\" || strings.TrimSpace(v) == \"\" {\n\t\t\t\tcontinue\n\t\t\t}\n\t\t\treq.Header.Set(k, v)\nutils/marking_direct.go:371:\traw := strings.TrimSpace(os.Getenv(\"MARKING_DIRECT_TIMEOUT_MS\"))\nutils/marking_direct.go:380:\t// only affects callers that explicitly raise MARKING_DIRECT_TIMEOUT_MS (e.g.",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 125,150p utils/chat_direct.go; sed -n 2536,257…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1079,
+   "type": "item/started",
+   "createdAt": 1790243803632,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "reasoning",
+     "id": "da77d2c3f3-i440",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 1080,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790243803632,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "itemId": "da77d2c3f3-i440",
+    "delta": "I want"
+   }
+  },
+  {
+   "seq": 1084,
+   "type": "item/completed",
+   "createdAt": 1790243804447,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "reasoning",
+     "id": "da77d2c3f3-i440",
+     "summary": [],
+     "content": [
+      "I want to verify the timeout bug: both MARKING_DIRECT_TIMEOUT_MS and CHAT_DIRECT_TIMEOUT_MS default to the same value, so raising the marking timeout wouldn't actually affect marking's Google streaming, since it still relies on chat's timeout setting. I should check lines 365-395 of marking_direct to confirm this.\n\n"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 1086,
+   "type": "item/started",
+   "createdAt": 1790243805276,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i441",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 365,395p utils/marking_direct.go; sed -n 2170,2185p utils/marking_direct.go; echo ---; /usr/bin/grep -n 'AUDTIO' -r --include='*.go' . | /usr/bin/grep -v '^./.claude' | head; echo ---; sed -n 25,50p eino_maths_suggestion_questions/internal/einopipeline/azure_responses.go",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 365,395p utils/marking_direct.go; sed -n 2170,…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1087,
+   "type": "item/completed",
+   "createdAt": 1790243806459,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "commandExecution",
+     "id": "da77d2c3f3-i441",
+     "command": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 365,395p utils/marking_direct.go; sed -n 2170,2185p utils/marking_direct.go; echo ---; /usr/bin/grep -n 'AUDTIO' -r --include='*.go' . | /usr/bin/grep -v '^./.claude' | head; echo ---; sed -n 25,50p eino_maths_suggestion_questions/internal/einopipeline/azure_responses.go",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "\tdefault:\n\t\treturn markingExecutionModeDirect\n\t}\n}\n\nfunc getMarkingDirectTimeout() time.Duration {\n\traw := strings.TrimSpace(os.Getenv(\"MARKING_DIRECT_TIMEOUT_MS\"))\n\tif raw == \"\" {\n\t\treturn defaultMarkingDirectTimeout\n\t}\n\tparsed, err := strconv.Atoi(raw)\n\tif err != nil || parsed < 1000 {\n\t\treturn defaultMarkingDirectTimeout\n\t}\n\t// Cap at 30 minutes. The default (when the env is unset) is unchanged, so this\n\t// only affects callers that explicitly raise MARKING_DIRECT_TIMEOUT_MS (e.g.\n\t// long-running batch scripts using high-reasoning models).\n\tif parsed > 1800000 {\n\t\tparsed = 1800000\n\t}\n\treturn time.Duration(parsed) * time.Millisecond\n}\n\n// DirectToolGuidanceEnabled supplies template data; the component owns the instructions.\nfunc DirectToolGuidanceEnabled() bool {\n\traw := strings.ToLower(strings.TrimSpace(os.Getenv(\"MARKING_DIRECT_APPLY_TOOLING_INSTRUCTION\")))\n\tif raw == \"\" {\n\t\treturn true\n\t}\n\treturn raw == \"true\" || raw == \"1\" || raw == \"yes\"\n}\n\t\t\t\"generationConfig\": generationConfig,\n\t\t}\n\t\tif strings.TrimSpace(systemInstruction) != \"\" {\n\t\t\trequestPayload[\"systemInstruction\"] = map[string]interface{}{\n\t\t\t\t\"parts\": []map[string]interface{}{\n\t\t\t\t\t{\"text\": systemInstruction},\n\t\t\t\t},\n\t\t\t}\n\t\t}\n\n\t\tresp, err := postChatDirectSSE(ctx, target.Endpoint, target.Headers, requestPayload)\n\t\tif err != nil {\n\t\t\treturn \"\", fmt.Errorf(\"Google request failed: %w\", err)\n\t\t}\n\n\t\tvar finishReason string\n---\n./scripts/practicepaper/images_test.go:1214:\tt.Setenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\", \"https://fallback.test\")\n./scripts/practicepaper/images_test.go:1236:\tt.Setenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\", \"https://fallback.test\")\n./scripts/practicepaper/images_test.go:1341:\tendpoint := strings.TrimSpace(os.Getenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\"))\n./scripts/practicepaper/images_test.go:1344:\t\tt.Skip(\"AZURE_OPENAI_FALLBACK_AUDTIO and AZURE_OPENAI_API_FALLBACK_AUDIO are required for live fallback image test\")\n./scripts/practicepaper/images.go:658:\t\tif fallbackEndpoint := strings.TrimSpace(os.Getenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\")); fallbackEndpoint != \"\" && strings.TrimSpace(os.Getenv(\"AZURE_OPENAI_API_FALLBACK_AUDIO\")) != \"\" {\n./scripts/practicepaper/images.go:675:\tfallbackEndpoint := buildAzureImageGenerationURL(os.Getenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\"))\n./handlers/speech_realtime_test.go:574:\tt.Setenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\", \"\")\n./handlers/speech_realtime_test.go:607:\tt.Setenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\", \"\")\n./handlers/speech_realtime_test.go:659:\tt.Setenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\", \"\")\n./handlers/speech_realtime.go:746:\tfallbackEndpoint := os.Getenv(\"AZURE_OPENAI_FALLBACK_AUDTIO\")\n---\n\tdeploymentEnvSuffix := \"GPT55\"\n\tdefaultDeployment := model\n\tdefaultAPIVersion := \"2025-03-01-preview\"\n\tswitch strings.ToLower(model) {\n\tcase \"gpt-5\", \"azuregpt-5\":\n\t\tmodelKey = \"gpt-5\"\n\t\tendpointEnvSuffix = \"GPT5\"\n\t\tapiKeyEnvSuffix = \"GPT5\"\n\t\tdeploymentEnvSuffix = \"GPT5\"\n\t\tdefaultDeployment = \"gpt-5-acme\"\n\t\tdefaultAPIVersion = \"2024-12-01-preview\"\n\tcase \"gpt-5.1\":\n\t\tendpoi\n…[fixture truncated]",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "cd \"/Users/dev/Documents/acmeacme/acme_api\" && sed -n 365,395p utils/marking_direct.go; sed -n 2170,…"
+     }
+    }
+   }
+  },
+  {
+   "seq": 1088,
+   "type": "item/completed",
+   "createdAt": 1790243808907,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "agentMessage",
+     "id": "da77d2c3f3-i442",
+     "text": "I've sent the full report back to the calling agent. It confirms the fragmentation you suspected: about 6,300 lines of provider plumbing sit outside `utils/` and `handlers/`. Roughly 5,300 of those are independent HTTP clients that don't go through the shared code.\n\n- **Five separate stacks with their own clients:** `course_creator.go`, `pdf_course_creator.go`, `scripts/practicepaper`, the Azure/Google adapters in `eino_maths_suggestion_questions`, and the one-off course tools under `tools/`.\n- **The eino maths module's clients run in production.** It is a separate Go module, but the root module imports it and the API's worker process starts its job (`main.go:178`). Its roughly 2,200 lines of Azure, Google, image and vision clients duplicate what `eino_runtime/` already does on top of the shared code.\n- **Seven Azure OpenAI clients** are built with different api-versions (from `2024-12-01-preview` to `2025-04-01-preview`), and there are two Responses API URL styles. The gpt-5.4 endpoint is looked up differently in four places, so the same model can hit different resources depending on the program.\n- **Retry behaviour varies a lot.** `course_creator.go` has jittered backoff and honours Retry-After. The practice-paper client has no retry at all, and `eino_textbook` inherits that gap. The image code has its own queue and failover.\n- **Two image-generation clients are near-copies,** and they check API keys in the opposite order. The practice-paper one reads a misspelt env var (`AZURE_OPENAI_FALLBACK_AUDTIO`) and has a specific Azure resource URL hardcoded as its default.\n- **Programs that do reuse the shared code have to fake an HTTP request to call it,** in three different ways. One script sets its timeout by changing an environment variable.\n- **`eino_textbook` has no clients of its own.** It wraps the practice-paper client and the textbook helper in `handlers/`. That means textbook generation runs on two runtimes: this one on eino and the one in `handlers/` on Genkit.\n\nNothing in `mcpserver/`, `services/`, `liveapi/` or `plugins/` calls a model directly. `server` and `quiz_analyzer` in the repo root are compiled binaries, not source.\n\nThe report has a per-program table (provider, transport, model selection, env vars, retry, timeout, JSON parsing) with file:line references, plus the full lists you asked for.",
+     "parentToolCallId": "da77d2c3f3-i35"
+    }
+   }
+  },
+  {
+   "seq": 1090,
+   "type": "item/backgroundTask/completed",
+   "createdAt": 1790243809023,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "backgroundTask",
+     "id": "da77d2c3f3-i36",
+     "familyId": "a433198eb23b17c50",
+     "taskType": "local_agent",
+     "description": "Map offline/CLI AI call sites",
+     "status": "completed",
+     "taskStatus": "completed",
+     "skipTranscript": false,
+     "usage": {
+      "totalTokens": 208453,
+      "toolUses": 66,
+      "durationMs": 380406
+     },
+     "summary": "This agent's report was delivered to you as a message from \"a433198eb23b17c50\" (its SubagentHandback call). Read it there; it is not repeated here.\n",
+     "outputFile": "/private/tmp/claude-501/-Users-dev-Documents-From-M1-Pro-Home-LA-acme-NextJS---Golang-acme-api/b9aa911b-8b98-4be7-ad8f-643f97bdabe5/tasks/a433198eb23b17c50.output",
+     "presentation": {
+      "label": {
+       "pending": "Running background agent",
+       "completed": "Background agent finished"
+      },
+      "icon": {
+       "glyph": "UserRound"
+      },
+      "title": "Map offline/CLI AI call sites"
+     },
+     "parentToolCallId": "da77d2c3f3-i35"
+    }
+   }
+  },
+  {
+   "seq": 1091,
+   "type": "item/started",
+   "createdAt": 1790243809539,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "item": {
+     "type": "reasoning",
+     "id": "da77d2c3f3-i443",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 1092,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790243809539,
+   "data": {
+    "providerThreadId": "b9aa911b-8b98-4be7-ad8f-643f97bdabe5",
+    "itemId": "da77d2c3f3-i443",
+    "delta": "I've"
+   }
+  }
+ ]
+}

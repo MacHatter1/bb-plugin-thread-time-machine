@@ -1,0 +1,267 @@
+{
+ "providerId": "pi",
+ "threadId": "thr_zrdyuhcp4w",
+ "originKind": null,
+ "note": "pi turn stopped mid-message",
+ "events": [
+  {
+   "seq": 10543,
+   "type": "item/completed",
+   "createdAt": 1789906026942,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "reasoning",
+     "id": "da57da562e-i63",
+     "summary": [],
+     "content": [
+      "Fixed, committed, released as 0.1.1, and live-verified.\n\nLet me write the report. Be honest and specific:\n- The bug: cursor replay from seq 0, 100 events/pass, ~1 hour to catch up on an 11k-event thread; long_turn measured wall clock - stale turn start.\n- Evidence: seq 1 turn/started 16h ago, turn/completed at seq 500 (past the first page) → phantom.\n- Fix: read backwards from head on first sight; page forward after; drain up to 5 pages; withhold wall-clock findings until current.\n- Result on that thread: severe long_turn gone; it now reports a *true* context_cliff at 95% (244731/258400) — that thread really is about to run out of context.\n- Also fixed earlier in the same session: triple-counted failures.\n- Cost/trade-off stated: long_turn may miss a turn that opened >1 page ago.\n- Version 0.1.1, 45 tests, committed.\n\nAlso thank them for the catch — briefly, not gushing.\n\nKeep it tight.\n"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 10545,
+   "type": "item/completed",
+   "createdAt": 1789906026960,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "agentMessage",
+     "id": "da57da562e-i64",
+     "text": "You were right, and the false positive was worse than a threshold problem — it was a lie about what the watchdog had actually read.\n\n## The bug\n\n`thr_v9cx8hmnw5` has ~11,300 events. On first sight I paged its log **forwards from seq 0, 100 events a pass**, so the cursor spent about an hour in yesterday evening. Meanwhile `long_turn` measured `now − turnStartedMs`, and `turnStartedMs` was a turn that opened 16 hours ago and closed 15 hours ago — its `turn/completed` sat at seq 500, past the page the watchdog had reached.\n\n```\nseq1   turn/started    09-19 19:59:45   ← folded\nseq2..499  …            (turn/completed at seq 500 never reached)\nreported: severe — \"Turn has run 57969s with no result\"\nactual:   active, last event 16s ago, working fine\n```\n\nSo it wasn't flagging a stuck thread. It was reporting the age of its own cursor.\n\n## The fix\n\n- **First sight reads backwards from the newest event.** A watchdog watches the present; it doesn't audit history.\n- Later pages move forward only, and a pass drains up to five pages before admitting it is behind.\n- **`stall` and `long_turn` are withheld until the reading is at the head of the log.** Those two measure wall clock, and wall clock against a stale cursor is meaningless. `loop`, `context_cliff`, `budget`, and `error_storm` keep firing — they're proved by the events already in hand.\n\nRegression test replays the real paging contract (`afterSeq` / `order` / `limit`) over an 1,200-event thread and asserts the phantom finding cannot come back. 45 tests green, shipped as **0.1.1**, committed.\n\n## What that thread actually looks like now\n\n```\n$ bb shepherd explain thr_v9cx8hmnw5\nthr_v9cx8hmnw5: status active, last event 16s ago, 24 recent steps\n  warn context_cliff: Context 95% full (244731/258400 tokens)\n```\n\nThe severe long turn is gone, and the same thread now reports something true and worth having: it is at **95% of its context window** and about to fall off it. That's the finding that was hiding behind the fake one.\n\n## The cost, stated plainly\n\nA turn that opened more than one page ago has no start in the head window, so `long_turn` waits for the next turn instead of guessing. I took that trade deliberately — a missed long turn is recoverable, a fabricated one teaches you to ignore the panel.\n\nTwo things you should know about how I got here: I shipped the cursor design without ever testing a thread with real history, and my earlier `error_storm` count was inflated 3× for the same class of reason (one failed turn arriving through three different keys). Both were caught by pointing it at your actual fleet rather than my fixtures. It's in `off` mode, so nothing was ever sent to that thread on the strength of the bad reading."
+    }
+   }
+  },
+  {
+   "seq": 10547,
+   "type": "turn/completed",
+   "createdAt": 1789906026960,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "status": "completed",
+    "providerCheckpointId": "a6f27b96"
+   }
+  },
+  {
+   "seq": 10548,
+   "type": "client/turn/requested",
+   "createdAt": 1789906059328,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_s5w59uczfy",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "It's a path: install inside this thread's workspace. Archive the thread and the plugin breaks. what i want you to do is create its own bb project and move it there",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "qwen-token-plan/qwen3.8-flash",
+     "serviceTier": "default",
+     "reasoningLevel": "xhigh",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 10551,
+   "type": "turn/started",
+   "createdAt": 1789906060322,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997"
+   }
+  },
+  {
+   "seq": 10553,
+   "type": "item/started",
+   "createdAt": 1789906093736,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "reasoning",
+     "id": "dabcd806fa-i1",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 10554,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1789906093736,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "itemId": "dabcd806fa-i1",
+    "delta": "The"
+   }
+  },
+  {
+   "seq": 10573,
+   "type": "item/started",
+   "createdAt": 1789906102696,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "agentMessage",
+     "id": "dabcd806fa-i2",
+     "text": ""
+    }
+   }
+  },
+  {
+   "seq": 10574,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1789906102696,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "itemId": "dabcd806fa-i2",
+    "delta": "Already done in"
+   }
+  },
+  {
+   "seq": 10575,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1789906103636,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "itemId": "dabcd806fa-i2",
+    "delta": " the previous turn — let me prove it rather than assert it:\n\n"
+   }
+  },
+  {
+   "seq": 10576,
+   "type": "item/completed",
+   "createdAt": 1789906103636,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "reasoning",
+     "id": "dabcd806fa-i1",
+     "summary": [],
+     "content": [
+      "The user wants: create its own BB project and move it there. I already did this in a previous turn! The repo is at `/Users/dev/Documents/bb-plugin-shepherd`, project `proj_75n4z3s44d` (bb-plugin-shepherd) created, and the plugin reinstalled from that durable path.\n\nBut the user's message quotes my earlier warning (\"It's a path: install inside this thread's workspace. Archive the thread and the plugin breaks.\") — they may not have registered that I already moved it, or they want verification. Let me verify the current state:\n1. `bb plugin list` source → should be /Users/dev/Documents/bb-plugin-shepherd\n2. `bb project list` → bb-plugin-shepherd exists\n3. The thread workspace no longer contains bb-plugin-shepherd.\n\nAlso maybe they want the *thread itself* moved to that project (update_environment_directory) — \"move it there\" most likely refers to the plugin, which is done. But there's a nuance: this thread's environment is the personal workspace; the plugin no longer lives there. Let me verify and report. And offer/do moving the thread into the new project via update_environment_directory — that would make future turns run in the plugin checkout. Given they said \"create its own bb project and move it there\", and the plugin is already moved, the remaining piece is arguably the thread's working directory. Hmm.\n\nCareful: if I call update_environment_directory, the turn stops and the provider cwd changes next turn. That seems aligned with \"move it there\" for follow-up work. But it also moves *this thread* away from the personal workspace, which might not be desired... Actually it's a brainstorming thread that built the plugin; moving it into the plugin project is reasonable and reversible.\n\nLet me first verify state, then decide: I think the best action is:\n1. Verify plugin source path + project exist (report proof).\n2. Since the plugin is already out of the thread workspace, the stated risk is gone. Then also move this thread into the new project so follow-up work happens there — but should I ask? The user explicitly asked \"create its own bb project and move it there\". The move is done for the code. The thread move is the remaining interpretation. I'll do the verification, and then use update_environment_directory to point this thread at the new project — that fully satisfies \"move it there\" and it's reversible.\n\nHmm, but wait: is the plugin's *BB project* the same as the plugin's install path? Yes, the project root = the plugin dir.\n\nOne more consideration: does the environment for that path already exist (another project owns it)? The tool handles it.\n\nAlso: after moving the thread, the working directory for future turns = /Users/dev/Documents/bb-plugin-shepherd. Good.\n\nLet me verify first with bash, then call update_environment_directory as the last action, and explain in the message before/after. The tool result ends my turn? \"After a successful switch, stop work in the current turn because the running provider cwd will not change until the next tu\n…[fixture truncated]"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 10577,
+   "type": "item/started",
+   "createdAt": 1789906103636,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "commandExecution",
+     "id": "dabcd806fa-i3",
+     "command": "cd /tmp && echo \"=== where the plugin is loaded from ===\"; bb plugin list 2>&1 | grep -A2 \"^shepherd@\"; echo; echo \"=== the BB project ===\"; bb project show proj_75n4z3s44d 2>&1 | sed -n '2,12p'; echo; echo \"=== is anything left in this thread's workspace? ===\"; ls -la /Users/dev/.bb/plugins/environment-personal-workspace/host-data/workspaces/thr_zrdyuhcp4w/",
+     "cwd": "/Users/dev/.bb/plugins/environment-personal-workspace/host-data/workspaces/thr_zrdyuhcp4w",
+     "status": "pending",
+     "approvalStatus": null
+    }
+   }
+  },
+  {
+   "seq": 10578,
+   "type": "item/commandExecution/outputDelta",
+   "createdAt": 1789906103741,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "itemId": "dabcd806fa-i3",
+    "delta": "=== where the plugin is loaded from ===\n"
+   }
+  },
+  {
+   "seq": 10582,
+   "type": "item/completed",
+   "createdAt": 1789906104031,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "item": {
+     "type": "commandExecution",
+     "id": "dabcd806fa-i3",
+     "command": "cd /tmp && echo \"=== where the plugin is loaded from ===\"; bb plugin list 2>&1 | grep -A2 \"^shepherd@\"; echo; echo \"=== the BB project ===\"; bb project show proj_75n4z3s44d 2>&1 | sed -n '2,12p'; echo; echo \"=== is anything left in this thread's workspace? ===\"; ls -la /Users/dev/.bb/plugins/environment-personal-workspace/host-data/workspaces/thr_zrdyuhcp4w/",
+     "cwd": "/Users/dev/.bb/plugins/environment-personal-workspace/host-data/workspaces/thr_zrdyuhcp4w",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "=== where the plugin is loaded from ===\nshepherd@0.1.1  running\n  source: path:/Users/dev/Documents/bb-plugin-shepherd\n  handlers: 415 calls / 4.3s total / 188ms max\n\n=== the BB project ===\n  ID:       proj_75n4z3s44d\n  Name:     bb-plugin-shepherd\n  Created:  20/09/2026, 12:41:28\n  Updated:  20/09/2026, 12:41:28\n  Sources:\n    local_path  /Users/dev/Documents/bb-plugin-shepherd [default]\n\n\n=== is anything left in this thread's workspace? ===\ntotal 0\ndrwxr-xr-x   2 dev  staff   64 20 Sep 12:41 .\ndrwxr-xr-x@ 15 dev  staff  480 20 Sep 13:07 ..\n",
+     "exitCode": 0
+    }
+   }
+  },
+  {
+   "seq": 10584,
+   "type": "system/thread/interrupted",
+   "createdAt": 1789906111245,
+   "data": {
+    "reason": "manual-stop"
+   }
+  },
+  {
+   "seq": 10585,
+   "type": "turn/completed",
+   "createdAt": 1789906111252,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997",
+    "status": "interrupted"
+   }
+  },
+  {
+   "seq": 10586,
+   "type": "client/turn/requested",
+   "createdAt": 1789906331306,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_fwutss7r86",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "is that also now its installed location and does it contain all the files not just the built result?",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "qwen-token-plan/qwen3.8-flash",
+     "serviceTier": "default",
+     "reasoningLevel": "xhigh",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 10589,
+   "type": "turn/started",
+   "createdAt": 1789906331765,
+   "data": {
+    "providerThreadId": "pi_afd25339-e0b0-4a5e-a125-842281a5f997"
+   }
+  }
+ ]
+}

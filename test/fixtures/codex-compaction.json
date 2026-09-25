@@ -1,0 +1,194 @@
+{
+ "providerId": "codex",
+ "threadId": "thr_fscguib8ew",
+ "originKind": null,
+ "note": "codex contextCompaction item",
+ "events": [
+  {
+   "seq": 490,
+   "type": "item/started",
+   "createdAt": 1790351398920,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "reasoning",
+     "id": "da947a1e7d-i3857",
+     "summary": [],
+     "content": [],
+     "presentation": {
+      "label": {
+       "pending": "Thinking",
+       "completed": "Thought"
+      },
+      "icon": {
+       "glyph": "Brain"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 491,
+   "type": "item/completed",
+   "createdAt": 1790351407356,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "reasoning",
+     "id": "da947a1e7d-i3857",
+     "summary": [],
+     "content": [],
+     "presentation": {
+      "label": {
+       "pending": "Thinking",
+       "completed": "Thought"
+      },
+      "icon": {
+       "glyph": "Brain"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 495,
+   "type": "item/started",
+   "createdAt": 1790351420455,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da947a1e7d-i3888",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 499,
+   "type": "item/completed",
+   "createdAt": 1790351457126,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da947a1e7d-i3888",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 500,
+   "type": "item/started",
+   "createdAt": 1790351458417,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "reasoning",
+     "id": "da947a1e7d-i3938",
+     "summary": [],
+     "content": [],
+     "presentation": {
+      "label": {
+       "pending": "Thinking",
+       "completed": "Thought"
+      },
+      "icon": {
+       "glyph": "Brain"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 501,
+   "type": "item/completed",
+   "createdAt": 1790351459511,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "reasoning",
+     "id": "da947a1e7d-i3938",
+     "summary": [],
+     "content": [],
+     "presentation": {
+      "label": {
+       "pending": "Thinking",
+       "completed": "Thought"
+      },
+      "icon": {
+       "glyph": "Brain"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 502,
+   "type": "item/started",
+   "createdAt": 1790351459511,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "item": {
+     "type": "agentMessage",
+     "id": "da947a1e7d-i3939",
+     "text": "",
+     "presentation": {
+      "label": {
+       "pending": "Responding",
+       "completed": "Responded"
+      },
+      "icon": {
+       "glyph": "MessageSquare"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 503,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790351459512,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "itemId": "da947a1e7d-i3939",
+    "delta": "I"
+   }
+  },
+  {
+   "seq": 504,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790351459737,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "itemId": "da947a1e7d-i3939",
+    "delta": "’m finishing"
+   }
+  },
+  {
+   "seq": 505,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790351459826,
+   "data": {
+    "providerThreadId": "01a0d922-d7f6-7f80-862b-f11be3174747",
+    "itemId": "da947a1e7d-i3939",
+    "delta": " the architecture test within the single"
+   }
+  }
+ ]
+}

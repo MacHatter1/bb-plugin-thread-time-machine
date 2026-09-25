@@ -1,0 +1,274 @@
+{
+ "providerId": "claude-code",
+ "threadId": "thr_83wufmd7ru",
+ "originKind": null,
+ "note": "claude-code compaction: repeated item/started, completed, then thread/compacted",
+ "events": [
+  {
+   "seq": 7525,
+   "type": "item/started",
+   "createdAt": 1790282503522,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "backgroundTask",
+     "id": "da531cdcdd-i798",
+     "familyId": "bgbjogmmx",
+     "taskType": "local_bash",
+     "description": "Surface warnings and rerun the suite",
+     "status": "pending",
+     "taskStatus": "running",
+     "skipTranscript": false,
+     "presentation": {
+      "label": {
+       "pending": "Running background command",
+       "completed": "Background command finished"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "Surface warnings and rerun the suite"
+     },
+     "parentToolCallId": "da531cdcdd-i797"
+    }
+   }
+  },
+  {
+   "seq": 7526,
+   "type": "item/backgroundTask/completed",
+   "createdAt": 1790282519010,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "backgroundTask",
+     "id": "da531cdcdd-i798",
+     "familyId": "bgbjogmmx",
+     "taskType": "local_bash",
+     "description": "Surface warnings and rerun the suite",
+     "status": "completed",
+     "taskStatus": "completed",
+     "skipTranscript": false,
+     "summary": "Surface warnings and rerun the suite",
+     "presentation": {
+      "label": {
+       "pending": "Running background command",
+       "completed": "Background command finished"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "Surface warnings and rerun the suite"
+     },
+     "parentToolCallId": "da531cdcdd-i797"
+    }
+   }
+  },
+  {
+   "seq": 7527,
+   "type": "item/completed",
+   "createdAt": 1790282519178,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "commandExecution",
+     "id": "da531cdcdd-i797",
+     "command": "python3 - <<'EOF'\np='src/constants.ts'\ns=open(p).read()\nold='''/**\n * After any gate ran out of budget, gates wait at most this long for this\n * long: hook passes are serialized, so waits across threads add up.\n */\nexport const GATE_BREAKER_MS = 60 * 1000;\nexport const GATE_BREAKER_BUDGET_MS = 500;'''\nnew='''/**\n * Hook passes are serialized server-wide, so gate waits across threads add\n * up. For GATE_BREAKER_MS after any gate runs out of budget, gates wait at\n * most GATE_BREAKER_BUDGET_MS.\n */\nexport const GATE_BREAKER_MS = 60 * 1000;\nexport const GATE_BREAKER_BUDGET_MS = 500;'''\nassert old in s; s=s.replace(old,new); open(p,'w').write(s)\n\np='src/format.ts'\ns=open(p).read()\nold='''    ...formatPlan(outcome.plan, { applied: true }),\n    ...formatVerification(outcome.verification),\n  ];'''\nnew='''    ...formatPlan(outcome.plan, { applied: true }),\n    ...formatVerification(outcome.verification),\n    ...outcome.warnings.map((warning) => `Warning: ${warning}`),\n  ];'''\nassert old in s; s=s.replace(old,new); open(p,'w').write(s)\n\np='src/ui/actions.tsx'\ns=open(p).read()\nold='''  const verified = outcome.verification?.ok === false ? \" Verification found differences; see the Checkpoints panel.\" : \"\";\n  return `${parts.join(\", \")}.${verified}`;'''\nnew='''  const verified = outcome.verification?.ok === false ? \" Verification found differences; see the Checkpoints panel.\" : \"\";\n  const warnings = outcome.warnings.length > 0 ? ` ${outcome.warnings.join(\" \")}` : \"\";\n  return `${parts.join(\", \")}.${verified}${warnings}`;'''\nassert old in s; s=s.replace(old,new)\nold='''  const show = outcome.verification?.ok === false ? toast.warning : toast.success;'''\nnew='''  const show = outcome.verification?.ok === false || outcome.warnings.length > 0 ? toast.warning : toast.success;'''\nassert old in s; s=s.replace(old,new)\nopen(p,'w').write(s)\n\n# app test fixtures need warnings\np='test/app.test.tsx'\ns=open(p).read()\ns=s.replace('''verification: { ok: true, mismatches: [], mismatchCount: 0, untouched: [], untouchedCount: 0 } }),''','''verification: { ok: true, mismatches: [], mismatchCount: 0, untouched: [], untouchedCount: 0 }, warnings: [] }),''')\ns=s.replace('''          verification: { ok: true, mismatches: [], mismatchCount: 0, untouched: [], untouchedCount: 0 },\n        }),''','''          verification: { ok: true, mismatches: [], mismatchCount: 0, untouched: [], untouchedCount: 0 },\n          warnings: [],\n        }),''')\nopen(p,'w').write(s)\n\n# git.ts: test hook to recompute the base env\np='src/host/git.ts'\ns=open(p).read()\nold='''/** Kill every git process this worker started (worker dispose). */'''\nnew='''/** Tests change HOME to fake a global git config; forget the cached env. */\nexport function resetGitBaseEnv(): void {\n  baseEnv = null;\n}\n\n/** Kill every git process this worker started (worker dispose). */'''\nassert old in s; s=s.replace(old,new); open(p,'w').write(s)\nprint(\"ok\")\nEOF\nnpx vitest run 2>&1 | tail -30",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "ok\n   ✓ what a restore never touches > skips nested repositories, including ones without commits, and leaves them alone  565ms\n   ✓ what a restore never touches > captures files the repository tracks even though its ignore rules match them  588ms\n   ✓ what a restore never touches > honors ignore rules above a workspace that is a repository subdirectory  509ms\n   ✓ what a restore never touches > does not follow the user's info/exclude out of scope and does honor it  417ms\n   ✓ hostile workspaces > never writes through a symlink that replaced a directory  597ms\n   ✓ hostile workspaces > protects paths behind an uncaptured symlink  658ms\n   ✓ hostile workspaces > stores bytes exactly despite .gitattributes line-ending and filter rules  392ms\n   ✓ limits and store management > returns per-file patches for diffs, including binary and type changes  544ms\n   ✓ limits and store management > restores another workspace's checkpoint into a fresh worktree (fork with files)  672ms\n   ✓ limits and store management > deletes checkpoint refs and reconciles unknown ones  503ms\n ✓ test/server.test.ts (23 tests) 17650ms\n   ✓ the message.dispatch gate > takes a before-turn checkpoint and proceeds  326ms\n   ✓ the message.dispatch gate > fails open when the budget runs out and finishes the checkpoint late in the background  1527ms\n   ✓ the message.dispatch gate > never waits past its hard limit even if the host call hangs  3232ms\n   ✓ the message.dispatch gate > does not make later messages wait behind a snapshot that already outlived the budget  2215ms\n   ✓ the message.dispatch gate > does not hold a steer that joins a running turn  1116ms\n   ✓ restores > maps messages to checkpoints, previews, restores, and undoes  1231ms\n   ✓ restores > warns in the preview when HEAD moved since the checkpoint  428ms\n   ✓ restores > refuses to restore while the thread or another thread in the workspace runs, and can stop them  537ms\n   ✓ lifecycle events > takes no after-turn checkpoint when nothing happened since the last one  357ms\n   ✓ retention > keeps the newest checkpoints per thread and drops archived threads' after the retention period  2203ms\n   ✓ forking with files > forks into a new worktree whose files match the checkpoint, then sends the prompt  1023ms\n   ✓ the bb rewind CLI > lists, shows, diffs, restores, and undoes from the command line  1335ms\n   ✓ an agent inside its own turn > is told to hand the restore to the user instead of stopping itself  347ms\n\n Test Files  10 passed (10)\n      Tests  118 passed (118)\n   Start at  21:41:40\n   Duration  18.08s (transform 444ms, setup 0ms, collect 1.12s, tests 29.42s, environment 138ms, prepare 579ms)",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "python3 - <<'EOF'"
+     }
+    }
+   }
+  },
+  {
+   "seq": 7528,
+   "type": "item/started",
+   "createdAt": 1790282519342,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i799",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7529,
+   "type": "item/started",
+   "createdAt": 1790282549286,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i800",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7530,
+   "type": "item/started",
+   "createdAt": 1790282579286,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i801",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7531,
+   "type": "item/started",
+   "createdAt": 1790282609288,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i802",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7532,
+   "type": "item/started",
+   "createdAt": 1790282639286,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i803",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7533,
+   "type": "item/started",
+   "createdAt": 1790282669288,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i804",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7534,
+   "type": "item/completed",
+   "createdAt": 1790282675616,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da531cdcdd-i804",
+     "presentation": {
+      "label": {
+       "pending": "Compacting context",
+       "completed": "Compacted context"
+      },
+      "icon": {
+       "glyph": "Archive"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 7535,
+   "type": "thread/compacted",
+   "createdAt": 1790282675759,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9"
+   }
+  },
+  {
+   "seq": 7537,
+   "type": "item/started",
+   "createdAt": 1790282679816,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "item": {
+     "type": "reasoning",
+     "id": "da531cdcdd-i805",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 7538,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790282679816,
+   "data": {
+    "providerThreadId": "041dfdb0-af3e-46dd-b652-038c02ea2de9",
+    "itemId": "da531cdcdd-i805",
+    "delta": "Good, the"
+   }
+  }
+ ]
+}

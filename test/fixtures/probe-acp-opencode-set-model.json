@@ -1,0 +1,53 @@
+{
+ "providerId": "acp-opencode",
+ "threadId": "thr_rbnenukxdk",
+ "originKind": null,
+ "note": "Probe task: create, edit, run ok + failing command",
+ "events": [
+  {
+   "seq": 1,
+   "type": "client/turn/requested",
+   "createdAt": 1790360424160,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_25wxwqjycn",
+    "source": "spawn",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "This is a short probe task for testing an event viewer. Keep it small and do not touch any other files.\n\n1. Create `probe/notes.md` containing exactly two lines: `alpha` and `beta`.\n2. Edit `probe/notes.md` so the second line reads `gamma` instead of `beta`.\n3. Run the shell command `cat probe/notes.md && ls probe`.\n4. Run the shell command `ls probe/does-not-exist` (it is expected to fail).\n5. Reply with one sentence saying what you did.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "thread-start"
+    },
+    "request": {
+     "method": "thread/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "opencode/space-bunny-free",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 14,
+   "type": "system/error",
+   "createdAt": 1790360427890,
+   "data": {
+    "code": "thread_command_failed",
+    "message": "Command thread.start failed",
+    "detail": "\"Method not found\": session/set_model: {\"method\":\"session/set_model\"}"
+   }
+  }
+ ]
+}

@@ -1,0 +1,148 @@
+{
+ "providerId": "pi",
+ "threadId": "thr_ug499uwz63",
+ "originKind": null,
+ "note": "pi compaction: item/started with no completion, then thread/compacted",
+ "events": [
+  {
+   "seq": 1960,
+   "type": "item/completed",
+   "createdAt": 1790251327286,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "reasoning",
+     "id": "da5796370d-i105",
+     "summary": [],
+     "content": [
+      "**Checking worktree cleanliness**\n\n**Checking untracked scan files**\n\n**Including untracked scan files**"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 1961,
+   "type": "item/started",
+   "createdAt": 1790251331458,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "reasoning",
+     "id": "da5796370d-i106",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 1962,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790251331458,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "itemId": "da5796370d-i106",
+    "delta": "**Adding untracked-file tests**"
+   }
+  },
+  {
+   "seq": 1966,
+   "type": "item/completed",
+   "createdAt": 1790251339049,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "reasoning",
+     "id": "da5796370d-i106",
+     "summary": [],
+     "content": [
+      "**Adding untracked-file tests**\n\n**Filtering untracked scan paths**"
+     ]
+    }
+   }
+  },
+  {
+   "seq": 1967,
+   "type": "item/started",
+   "createdAt": 1790251343809,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "fileChange",
+     "id": "da5796370d-i107",
+     "changes": [
+      {
+       "path": ".harness/opengrep-scan.mjs",
+       "kind": "update"
+      }
+     ],
+     "status": "pending",
+     "approvalStatus": null
+    }
+   }
+  },
+  {
+   "seq": 1968,
+   "type": "item/completed",
+   "createdAt": 1790251343809,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "fileChange",
+     "id": "da5796370d-i107",
+     "changes": [
+      {
+       "path": ".harness/opengrep-scan.mjs",
+       "kind": "update"
+      }
+     ],
+     "status": "completed",
+     "approvalStatus": null
+    }
+   }
+  },
+  {
+   "seq": 1970,
+   "type": "item/started",
+   "createdAt": 1790251343915,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "contextCompaction",
+     "id": "da5796370d-i108"
+    }
+   }
+  },
+  {
+   "seq": 1971,
+   "type": "thread/compacted",
+   "createdAt": 1790251411176,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25"
+   }
+  },
+  {
+   "seq": 1973,
+   "type": "item/started",
+   "createdAt": 1790251417965,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "item": {
+     "type": "reasoning",
+     "id": "da5796370d-i109",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 1974,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790251417965,
+   "data": {
+    "providerThreadId": "pi_d943a44b-5ed6-45a1-844a-b55bbb157d25",
+    "itemId": "da5796370d-i109",
+    "delta": "**Adding untracked API test**"
+   }
+  }
+ ]
+}

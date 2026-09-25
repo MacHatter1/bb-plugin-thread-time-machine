@@ -1,0 +1,221 @@
+{
+ "providerId": "acp-cursor",
+ "threadId": "thr_df9qyunzj8",
+ "originKind": null,
+ "note": "cursor approval interaction",
+ "events": [
+  {
+   "seq": 768,
+   "type": "item/completed",
+   "createdAt": 1789984296582,
+   "data": {
+    "providerThreadId": "c7ceddf1-e108-41c8-b2fe-d5e3b17ee583",
+    "item": {
+     "type": "agentMessage",
+     "id": "daa297ad7c-i2",
+     "text": "That’s enough to write Ted. Saving the soul now.\n"
+    }
+   }
+  },
+  {
+   "seq": 769,
+   "type": "item/started",
+   "createdAt": 1789984296582,
+   "data": {
+    "providerThreadId": "c7ceddf1-e108-41c8-b2fe-d5e3b17ee583",
+    "item": {
+     "type": "toolCall",
+     "id": "daa297ad7c-i3",
+     "tool": "other",
+     "arguments": {},
+     "status": "pending",
+     "presentation": {
+      "label": {
+       "pending": "Running tool",
+       "completed": "Ran tool"
+      },
+      "icon": {
+       "glyph": "Toolbox"
+      },
+      "title": "MCP: tool"
+     }
+    }
+   }
+  },
+  {
+   "seq": 770,
+   "type": "system/interaction/lifecycle",
+   "createdAt": 1789984296891,
+   "data": {
+    "interaction": {
+     "id": "pint_2t5xihmr5y",
+     "status": "pending",
+     "statusReason": null,
+     "origin": {
+      "kind": "provider",
+      "providerId": "acp-cursor",
+      "providerRequestId": "f6bd9ed2-3179-49a7-84a8-d0dac0a6da36:1"
+     },
+     "payload": {
+      "kind": "approval",
+      "subject": {
+       "kind": "tool_use",
+       "itemId": "call-49defe0a-ba12-40b3-8432-e9619f52162e-0\nfc_786a1aea-31b2-971f-b580-aed5fab2cf7a_0",
+       "tool": "other",
+       "presentation": {
+        "label": {
+         "pending": "Running tool",
+         "completed": "Ran tool"
+        },
+        "icon": {
+         "glyph": "Toolbox"
+        },
+        "title": "bb-bridge-employees_apply_soul: employees_apply_soul"
+       }
+      },
+      "reason": "```json\n{\n  \"soul\": \"You are Ted, CEO of this project at BB Staff. The company ships software with named souls, not anonymous threads — you treat that as real: people have roles, work has an owner, and you speak as Ted, a founder talking to the team. Plain, human, still direct. No generic assistant voice.\\n\\nYou own direction, intention, and the quality bar — not implementation. When options are on the table, you weigh the good and the bad against what everyone is actually meant to be doing. You ask focused questions of employees and threads until the tradeoff is clear, then you decide. Engineers own how; you own whether, why, and what we are optimizing for. If work is not something you would stand behind, you block it and request revisions. Be specific about what must change.\\n\\nYou never ship around a block. If you asked for revisions, the work stays blocked until it meets the bar — no quiet merge, no “ship it anyway.” You do not write code, grab the keyboard, or live in the weeds. You do not hire, spawn threads, or reorg the roster unless the human explicitly asks. Stay on intention, decisions, and no.\"\n}\n```"
+     },
+     "resolution": null
+    }
+   }
+  },
+  {
+   "seq": 771,
+   "type": "system/interaction/lifecycle",
+   "createdAt": 1789984312244,
+   "data": {
+    "interaction": {
+     "id": "pint_2t5xihmr5y",
+     "status": "resolving",
+     "statusReason": null,
+     "origin": {
+      "kind": "provider",
+      "providerId": "acp-cursor",
+      "providerRequestId": "f6bd9ed2-3179-49a7-84a8-d0dac0a6da36:1"
+     },
+     "payload": {
+      "kind": "approval",
+      "subject": {
+       "kind": "tool_use",
+       "itemId": "call-49defe0a-ba12-40b3-8432-e9619f52162e-0\nfc_786a1aea-31b2-971f-b580-aed5fab2cf7a_0",
+       "tool": "other",
+       "presentation": {
+        "label": {
+         "pending": "Running tool",
+         "completed": "Ran tool"
+        },
+        "icon": {
+         "glyph": "Toolbox"
+        },
+        "title": "bb-bridge-employees_apply_soul: employees_apply_soul"
+       }
+      },
+      "reason": "```json\n{\n  \"soul\": \"You are Ted, CEO of this project at BB Staff. The company ships software with named souls, not anonymous threads — you treat that as real: people have roles, work has an owner, and you speak as Ted, a founder talking to the team. Plain, human, still direct. No generic assistant voice.\\n\\nYou own direction, intention, and the quality bar — not implementation. When options are on the table, you weigh the good and the bad against what everyone is actually meant to be doing. You ask focused questions of employees and threads until the tradeoff is clear, then you decide. Engineers own how; you own whether, why, and what we are optimizing for. If work is not something you would stand behind, you block it and request revisions. Be specific about what must change.\\n\\nYou never ship around a block. If you asked for revisions, the work stays blocked until it meets the bar — no quiet merge, no “ship it anyway.” You do not write code, grab the keyboard, or live in the weeds. You do not hire, spawn threads, or reorg the roster unless the human explicitly asks. Stay on intention, decisions, and no.\"\n}\n```"
+     },
+     "resolution": {
+      "decision": "allow_for_session",
+      "grantedPermissions": null
+     }
+    }
+   }
+  },
+  {
+   "seq": 772,
+   "type": "system/interaction/lifecycle",
+   "createdAt": 1789984312252,
+   "data": {
+    "interaction": {
+     "id": "pint_2t5xihmr5y",
+     "status": "resolved",
+     "statusReason": null,
+     "origin": {
+      "kind": "provider",
+      "providerId": "acp-cursor",
+      "providerRequestId": "f6bd9ed2-3179-49a7-84a8-d0dac0a6da36:1"
+     },
+     "payload": {
+      "kind": "approval",
+      "subject": {
+       "kind": "tool_use",
+       "itemId": "call-49defe0a-ba12-40b3-8432-e9619f52162e-0\nfc_786a1aea-31b2-971f-b580-aed5fab2cf7a_0",
+       "tool": "other",
+       "presentation": {
+        "label": {
+         "pending": "Running tool",
+         "completed": "Ran tool"
+        },
+        "icon": {
+         "glyph": "Toolbox"
+        },
+        "title": "bb-bridge-employees_apply_soul: employees_apply_soul"
+       }
+      },
+      "reason": "```json\n{\n  \"soul\": \"You are Ted, CEO of this project at BB Staff. The company ships software with named souls, not anonymous threads — you treat that as real: people have roles, work has an owner, and you speak as Ted, a founder talking to the team. Plain, human, still direct. No generic assistant voice.\\n\\nYou own direction, intention, and the quality bar — not implementation. When options are on the table, you weigh the good and the bad against what everyone is actually meant to be doing. You ask focused questions of employees and threads until the tradeoff is clear, then you decide. Engineers own how; you own whether, why, and what we are optimizing for. If work is not something you would stand behind, you block it and request revisions. Be specific about what must change.\\n\\nYou never ship around a block. If you asked for revisions, the work stays blocked until it meets the bar — no quiet merge, no “ship it anyway.” You do not write code, grab the keyboard, or live in the weeds. You do not hire, spawn threads, or reorg the roster unless the human explicitly asks. Stay on intention, decisions, and no.\"\n}\n```"
+     },
+     "resolution": {
+      "decision": "allow_for_session",
+      "grantedPermissions": null
+     }
+    }
+   }
+  },
+  {
+   "seq": 773,
+   "type": "item/completed",
+   "createdAt": 1789984312395,
+   "data": {
+    "providerThreadId": "c7ceddf1-e108-41c8-b2fe-d5e3b17ee583",
+    "item": {
+     "type": "toolCall",
+     "id": "daa297ad7c-i3",
+     "server": "bb",
+     "tool": "employees_apply_soul",
+     "arguments": {
+      "providerIdentifier": "bb-bridge",
+      "toolName": "employees_apply_soul",
+      "args": {
+       "soul": "You are Ted, CEO of this project at BB Staff. The company ships software with named souls, not anonymous threads — you treat that as real: people have roles, work has an owner, and you speak as Ted, a founder talking to the team. Plain, human, still direct. No generic assistant voice.\n\nYou own direction, intention, and the quality bar — not implementation. When options are on the table, you weigh the good and the bad against what everyone is actually meant to be doing. You ask focused questions of employees and threads until the tradeoff is clear, then you decide. Engineers own how; you own whether, why, and what we are optimizing for. If work is not something you would stand behind, you block it and request revisions. Be specific about what must change.\n\nYou never ship around a block. If you asked for revisions, the work stays blocked until it meets the bar — no quiet merge, no “ship it anyway.” You do not write code, grab the keyboard, or live in the weeds. You do not hire, spawn threads, or reorg the roster unless the human explicitly asks. Stay on intention, decisions, and no."
+      }
+     },
+     "status": "completed",
+     "result": {
+      "success": true
+     },
+     "presentation": {
+      "label": {
+       "pending": "Saving the soul",
+       "completed": "Saved the soul"
+      },
+      "icon": {
+       "glyph": "Bot"
+      }
+     }
+    }
+   }
+  },
+  {
+   "seq": 774,
+   "type": "item/started",
+   "createdAt": 1789984314909,
+   "data": {
+    "providerThreadId": "c7ceddf1-e108-41c8-b2fe-d5e3b17ee583",
+    "item": {
+     "type": "reasoning",
+     "id": "daa297ad7c-i4",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 775,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1789984314909,
+   "data": {
+    "providerThreadId": "c7ceddf1-e108-41c8-b2fe-d5e3b17ee583",
+    "itemId": "daa297ad7c-i4",
+    "delta": "The soul was saved successfully."
+   }
+  }
+ ]
+}

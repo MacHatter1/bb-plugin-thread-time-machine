@@ -1,0 +1,240 @@
+{
+ "providerId": "acp-antigravity",
+ "threadId": "thr_ihq4pm8a4j",
+ "originKind": null,
+ "note": "antigravity rejected turn + system/error",
+ "events": [
+  {
+   "seq": 45,
+   "type": "item/completed",
+   "createdAt": 1790359720649,
+   "data": {
+    "providerThreadId": "a2dec378-9a25-4ef7-aa2a-36170e585bfc",
+    "item": {
+     "type": "fileRead",
+     "id": "da54ac74d5-i4",
+     "path": "/Users/dev/Documents/bb-plugin-playbooks/server.ts",
+     "status": "completed",
+     "presentation": {
+      "label": {
+       "pending": "Reading file",
+       "completed": "Read file"
+      },
+      "icon": {
+       "glyph": "FileText"
+      },
+      "title": "server.ts"
+     }
+    }
+   }
+  },
+  {
+   "seq": 46,
+   "type": "item/completed",
+   "createdAt": 1790359720649,
+   "data": {
+    "providerThreadId": "a2dec378-9a25-4ef7-aa2a-36170e585bfc",
+    "item": {
+     "type": "fileRead",
+     "id": "da54ac74d5-i5",
+     "path": "/Users/dev/Documents/bb-plugin-playbooks/server.ts",
+     "status": "completed",
+     "presentation": {
+      "label": {
+       "pending": "Reading file",
+       "completed": "Read file"
+      },
+      "icon": {
+       "glyph": "FileText"
+      },
+      "title": "server.ts"
+     }
+    }
+   }
+  },
+  {
+   "seq": 47,
+   "type": "item/completed",
+   "createdAt": 1790359720649,
+   "data": {
+    "providerThreadId": "a2dec378-9a25-4ef7-aa2a-36170e585bfc",
+    "item": {
+     "type": "fileRead",
+     "id": "da54ac74d5-i7",
+     "path": "/Users/dev/Documents/bb-plugin-playbooks/README.md",
+     "status": "completed",
+     "presentation": {
+      "label": {
+       "pending": "Reading file",
+       "completed": "Read file"
+      },
+      "icon": {
+       "glyph": "FileText"
+      },
+      "title": "README.md"
+     }
+    }
+   }
+  },
+  {
+   "seq": 49,
+   "type": "item/completed",
+   "createdAt": 1790359720649,
+   "data": {
+    "providerThreadId": "a2dec378-9a25-4ef7-aa2a-36170e585bfc",
+    "item": {
+     "type": "agentMessage",
+     "id": "da54ac74d5-i8",
+     "text": "**No, not manually, and with an important distinction between plugins:**\n\n1. **`workflows` (built-in) vs. `workflow` (standalone):**\n   * Playbooks depend on BB's built-in **`workflows`** engine (`id: \"workflows\"`), **not** the separate third-party/standalone **`workflow`** plugin (which uses `.workflow/` scripts).\n\n2. **Automatic enablement:**\n   * You do **not** need to manually enable the `workflows` plugin beforehand.\n   * Playbooks includes an `autoEnableWorkflows` setting (enabled by default in [server.ts](file:///Users/dev/Documents/bb-plugin-playbooks/server.ts#L266-L270)).\n   * When a playbook runs, [`ensureWorkflows()`](file:///Users/dev/Documents/bb-plugin-playbooks/server.ts#L469-L477) automatically verifies whether `workflows` is active and enables it on your behalf via `bb.sdk.plugins.enable({ pluginId: \"workflows\" })` if it was disabled.\n\nThe only scenario where manual intervention is required is if you explicitly disabled the `autoEnableWorkflows` setting in Playbooks' settings (`autoEnableWorkflows: false`)."
+    }
+   }
+  },
+  {
+   "seq": 50,
+   "type": "turn/completed",
+   "createdAt": 1790359720649,
+   "data": {
+    "providerThreadId": "a2dec378-9a25-4ef7-aa2a-36170e585bfc",
+    "status": "completed"
+   }
+  },
+  {
+   "seq": 51,
+   "type": "client/turn/requested",
+   "createdAt": 1790359780731,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_88yiqiqhf9",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "$bb-plugin-repo",
+      "mentions": [
+       {
+        "start": 0,
+        "end": 15,
+        "resource": {
+         "kind": "command",
+         "trigger": "$",
+         "name": "bb-plugin-repo",
+         "source": "skill",
+         "origin": "user",
+         "label": "bb-plugin-repo",
+         "argumentHint": null
+        }
+       }
+      ]
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gemini-3.8-flash",
+     "serviceTier": "default",
+     "reasoningLevel": "high",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 52,
+   "type": "client/turn/rejected",
+   "createdAt": 1790359787640,
+   "data": {
+    "requestId": "creq_88yiqiqhf9",
+    "reason": "command_failed",
+    "message": "Invalid params for \"turn/start\": params.input.0.mentions.0.resource.trigger: Invalid input: expected \"/\""
+   }
+  },
+  {
+   "seq": 53,
+   "type": "system/error",
+   "createdAt": 1790359787640,
+   "data": {
+    "code": "thread_command_failed",
+    "message": "Command turn.submit failed",
+    "detail": "Invalid params for \"turn/start\": params.input.0.mentions.0.resource.trigger: Invalid input: expected \"/\""
+   }
+  },
+  {
+   "seq": 57,
+   "type": "client/turn/requested",
+   "createdAt": 1790359981409,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_72z8ghs3w2",
+    "source": "tell",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "$bb-plugin-repo",
+      "mentions": [
+       {
+        "start": 0,
+        "end": 15,
+        "resource": {
+         "kind": "command",
+         "trigger": "$",
+         "name": "bb-plugin-repo",
+         "source": "skill",
+         "origin": "user",
+         "label": "bb-plugin-repo",
+         "argumentHint": null
+        }
+       }
+      ]
+     }
+    ],
+    "target": {
+     "kind": "new-turn"
+    },
+    "request": {
+     "method": "turn/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "gemini-3.8-flash",
+     "serviceTier": "default",
+     "reasoningLevel": "high",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 58,
+   "type": "client/turn/rejected",
+   "createdAt": 1790359981479,
+   "data": {
+    "requestId": "creq_72z8ghs3w2",
+    "reason": "command_failed",
+    "message": "Invalid params for \"turn/start\": params.input.0.mentions.0.resource.trigger: Invalid input: expected \"/\""
+   }
+  },
+  {
+   "seq": 59,
+   "type": "system/error",
+   "createdAt": 1790359981480,
+   "data": {
+    "code": "thread_command_failed",
+    "message": "Command turn.submit failed",
+    "detail": "Invalid params for \"turn/start\": params.input.0.mentions.0.resource.trigger: Invalid input: expected \"/\""
+   }
+  }
+ ]
+}

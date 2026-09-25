@@ -1,0 +1,157 @@
+{
+ "providerId": "pi",
+ "threadId": "thr_vfk78edrmb",
+ "originKind": "fork",
+ "note": "pi fork thread (originKind fork)",
+ "events": [
+  {
+   "seq": 1,
+   "type": "client/turn/requested",
+   "createdAt": 1790345578248,
+   "data": {
+    "direction": "outbound",
+    "requestId": "creq_j4nukpfv7b",
+    "source": "spawn",
+    "initiator": "user",
+    "senderThreadId": null,
+    "systemMessageKind": "unlabeled",
+    "systemMessageSubject": null,
+    "input": [
+     {
+      "type": "text",
+      "text": "Reply with just the word ready.",
+      "mentions": []
+     }
+    ],
+    "target": {
+     "kind": "thread-start"
+    },
+    "request": {
+     "method": "thread/start",
+     "params": {}
+    },
+    "execution": {
+     "model": "qwen-token-plan/qwen3.7-max",
+     "serviceTier": "default",
+     "reasoningLevel": "medium",
+     "permissionMode": "full",
+     "source": "client/turn/requested"
+    }
+   }
+  },
+  {
+   "seq": 16,
+   "type": "turn/started",
+   "createdAt": 1790345579525,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb"
+   }
+  },
+  {
+   "seq": 20,
+   "type": "item/started",
+   "createdAt": 1790345581425,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "item": {
+     "type": "reasoning",
+     "id": "da170ffe4c-i1",
+     "summary": [],
+     "content": []
+    }
+   }
+  },
+  {
+   "seq": 21,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790345581425,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "itemId": "da170ffe4c-i1",
+    "delta": "The"
+   }
+  },
+  {
+   "seq": 22,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790345581525,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "itemId": "da170ffe4c-i1",
+    "delta": " user wants me to reply with just \""
+   }
+  },
+  {
+   "seq": 23,
+   "type": "item/reasoning/textDelta",
+   "createdAt": 1790345581525,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "itemId": "da170ffe4c-i1",
+    "delta": "ready\"."
+   }
+  },
+  {
+   "seq": 24,
+   "type": "item/started",
+   "createdAt": 1790345581525,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "item": {
+     "type": "agentMessage",
+     "id": "da170ffe4c-i2",
+     "text": ""
+    }
+   }
+  },
+  {
+   "seq": 25,
+   "type": "item/agentMessage/delta",
+   "createdAt": 1790345581525,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "itemId": "da170ffe4c-i2",
+    "delta": "ready"
+   }
+  },
+  {
+   "seq": 26,
+   "type": "item/completed",
+   "createdAt": 1790345581525,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "item": {
+     "type": "reasoning",
+     "id": "da170ffe4c-i1",
+     "summary": [],
+     "content": [
+      "The user wants me to reply with just \"ready\"."
+     ]
+    }
+   }
+  },
+  {
+   "seq": 28,
+   "type": "item/completed",
+   "createdAt": 1790345581528,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "item": {
+     "type": "agentMessage",
+     "id": "da170ffe4c-i2",
+     "text": "ready"
+    }
+   }
+  },
+  {
+   "seq": 30,
+   "type": "turn/completed",
+   "createdAt": 1790345581528,
+   "data": {
+    "providerThreadId": "thr_vfk78edrmb",
+    "status": "completed",
+    "providerCheckpointId": "cf39ff16"
+   }
+  }
+ ]
+}

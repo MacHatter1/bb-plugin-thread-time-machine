@@ -1,0 +1,137 @@
+{
+ "providerId": "claude-code",
+ "threadId": "thr_wtjdvv8npv",
+ "originKind": null,
+ "note": "claude-code: one fileChange whose header-only diff holds two old/new pairs (addTask, formatTask)",
+ "events": [
+  {
+   "seq": 38,
+   "type": "item/completed",
+   "createdAt": 1790362082581,
+   "data": {
+    "providerThreadId": "718aa510-3343-4ded-886d-a822ae7e6cb4",
+    "item": {
+     "type": "agentMessage",
+     "id": "da06d33c14-i7",
+     "text": "Both new tests fail as expected. Now the implementation:"
+    }
+   }
+  },
+  {
+   "seq": 40,
+   "type": "item/started",
+   "createdAt": 1790362084631,
+   "data": {
+    "providerThreadId": "718aa510-3343-4ded-886d-a822ae7e6cb4",
+    "item": {
+     "type": "fileChange",
+     "id": "da06d33c14-i8",
+     "changes": [
+      {
+       "path": "/private/tmp/acme-todo/todo.js",
+       "kind": "update",
+       "diff": "--- a/private/tmp/acme-todo/todo.js\n+++ b/private/tmp/acme-todo/todo.js\n-export function addTask(tasks, text) {\n-  return [...tasks, { id: tasks.length + 1, text, done: false }];\n+export function addTask(tasks, text, due) {\n+  return [...tasks, { id: tasks.length + 1, text, done: false, due }];\n-  return `${task.done ? \"[x]\" : \"[ ]\"} ${task.text}`;\n+  const due = task.due ? ` (due ${task.due.slice(0, 10)})` : \"\";\n+  return `${task.done ? \"[x]\" : \"[ ]\"} ${task.text}${due}`;\n"
+      }
+     ],
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing file",
+       "completed": "Edited file"
+      },
+      "icon": {
+       "glyph": "EditFile"
+      },
+      "title": "todo.js"
+     }
+    }
+   }
+  },
+  {
+   "seq": 41,
+   "type": "item/completed",
+   "createdAt": 1790362084631,
+   "data": {
+    "providerThreadId": "718aa510-3343-4ded-886d-a822ae7e6cb4",
+    "item": {
+     "type": "fileChange",
+     "id": "da06d33c14-i8",
+     "changes": [
+      {
+       "path": "/private/tmp/acme-todo/todo.js",
+       "kind": "update",
+       "diff": "--- a/private/tmp/acme-todo/todo.js\n+++ b/private/tmp/acme-todo/todo.js\n-export function addTask(tasks, text) {\n-  return [...tasks, { id: tasks.length + 1, text, done: false }];\n+export function addTask(tasks, text, due) {\n+  return [...tasks, { id: tasks.length + 1, text, done: false, due }];\n-  return `${task.done ? \"[x]\" : \"[ ]\"} ${task.text}`;\n+  const due = task.due ? ` (due ${task.due.slice(0, 10)})` : \"\";\n+  return `${task.done ? \"[x]\" : \"[ ]\"} ${task.text}${due}`;\n"
+      }
+     ],
+     "status": "completed",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Editing file",
+       "completed": "Edited file"
+      },
+      "icon": {
+       "glyph": "EditFile"
+      },
+      "title": "todo.js"
+     }
+    }
+   }
+  },
+  {
+   "seq": 43,
+   "type": "item/started",
+   "createdAt": 1790362085214,
+   "data": {
+    "providerThreadId": "718aa510-3343-4ded-886d-a822ae7e6cb4",
+    "item": {
+     "type": "commandExecution",
+     "id": "da06d33c14-i9",
+     "command": "npm test 2>&1 | tail -12",
+     "cwd": "",
+     "status": "pending",
+     "approvalStatus": null,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "npm test 2>&1 | tail -12"
+     }
+    }
+   }
+  },
+  {
+   "seq": 44,
+   "type": "item/completed",
+   "createdAt": 1790362085372,
+   "data": {
+    "providerThreadId": "718aa510-3343-4ded-886d-a822ae7e6cb4",
+    "item": {
+     "type": "commandExecution",
+     "id": "da06d33c14-i9",
+     "command": "npm test 2>&1 | tail -12",
+     "cwd": "",
+     "status": "completed",
+     "approvalStatus": null,
+     "aggregatedOutput": "✔ adds a task (0.329542ms)\n✔ formats a task (0.058666ms)\n✔ adds a task with a due date (0.0485ms)\n✔ formats a task with a due date (0.037333ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 39.431",
+     "exitCode": 0,
+     "presentation": {
+      "label": {
+       "pending": "Running command",
+       "completed": "Ran command"
+      },
+      "icon": {
+       "glyph": "Terminal"
+      },
+      "title": "npm test 2>&1 | tail -12"
+     }
+    }
+   }
+  }
+ ]
+}
